@@ -1,0 +1,17 @@
+.box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 310px;
+  height: 180px;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin: 0px 20px;
+}
+
+.boxItem{
+  font-size: 30px;
+  color: white;
+  margin: 6px 0px;
+}

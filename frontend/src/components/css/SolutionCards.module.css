@@ -1,0 +1,17 @@
+.titleContainer{
+  text-align: center;
+  border-style: solid;
+  border-color: black;
+  border-width: 4px;
+  border-radius: 5px;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 5px;
+  padding: 10px 5px;
+  background-color: #6b00b3;
+  color: white;
+}
+
+.titleHead{
+  margin: 0;
+}

@@ -1,0 +1,11 @@
+.ErrorBox{
+  display: flex;
+  text-align: cemter;
+  justify-content: center;
+  padding: 5px 10px;
+}
+
+.ErrorText{
+  color: tomato;
+  margin: 0px
+}
