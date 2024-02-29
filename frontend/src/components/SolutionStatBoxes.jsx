@@ -23,7 +23,6 @@ function SolutionStatBoxes() {
       })
       
     }catch(err){
-      //alert('Something went wrong :(')
       setIsError(true)
       console.log(err)
     }
@@ -45,9 +44,9 @@ function SolutionStatBoxes() {
       {
         Object.keys(solutionStatsObj).length > 0 ? (
           <>
-            <SolutionStatBox language='CPP' solvedCount={solutionStatsObj.countCPP} />
-            <SolutionStatBox language='JS'solvedCount={solutionStatsObj.countJS} />
-            <SolutionStatBox language='SQL' solvedCount={solutionStatsObj.countSQL} />
+            <SolutionStatBox language='CPP' solvedCount={solutionStatsObj.solvedCountCPP} />
+            <SolutionStatBox language='JS'solvedCount={solutionStatsObj.solvedCountJS} />
+            <SolutionStatBox language='SQL' solvedCount={solutionStatsObj.solvedCountSQL} />
           </>
         ) : ( <></> )
       }

@@ -1,10 +1,12 @@
 import classes from './css/About.module.css'
+import emailLogo from '../logos/email_logo.svg'
 import githubLogo from '../logos/github_logo.svg'
 import linkedinLogo from '../logos/linkedin_logo.svg'
 
 function AboutPage() {
-  const myLinkedinLink = 'https://in.linkedin.com/in/shivansh-sanoria-948343245'
-  const myGithubLink = ''
+  const myGithubLink = 'https://github.com/shivanshsanoria1/Noobcode_MERN_stack'
+  const myLinkedinLink = 'https://www.linkedin.com/in/shivansh-sanoria-948343245/'
+  const myContactEmail = 'contact_noobcode@gmail.com'
 
   return (
     <div className={classes.container}>
@@ -43,10 +45,13 @@ function AboutPage() {
         How to use ?
       </div>
       <div className={classes.content}>
-        Just enter the question number which you are stuck at in the search bar to get the solutions.
+        Just enter the question number which you are stuck at in the search bar to get the solutions. No need to create an account just start learning.
       </div>
       <div className={classes.content}>
       Multiple solutions are available here for various problems to help you find different ways to approach the problem.
+      </div>
+      <div className={classes.content}>
+        Solutions are arranged in order from least optimized to most optimized.
       </div>
       <div className={classes.content}>
       Don't underestimate the power of Brute-force / Unaccepted solutions, analyze them and try to find a way to optimize to reach to the Accepted version.
@@ -65,18 +70,21 @@ function AboutPage() {
         Incase you find any solution to be wrong, not working, report bugs or any other suggestion.
       </div>
       <div className={classes.content}>
-      Please send an email at: contact_noobcode@gmail.com
+      Please send an email at: { myContactEmail }
       </div>
 
       <br/>
       <hr className={classes.line} />
       
       <div className={classes.logos}>
-        <a href={myLinkedinLink} target='_blank' rel="noopener noreferrer">
-          <img src={linkedinLogo} alt="linkedin" className={classes.logo} />
+        <a href={`mailto:${myContactEmail}?subject=Feedback`}>
+          <img src={emailLogo} alt="contact email" className={classes.logo} />
         </a>
         <a href={myGithubLink} target='_blank' rel="noopener noreferrer">
           <img src={githubLogo} alt="github" className={classes.logo} />
+        </a>
+        <a href={myLinkedinLink} target='_blank' rel="noopener noreferrer">
+          <img src={linkedinLogo} alt="linkedin" className={classes.logo} />
         </a>
       </div>
     </div>

@@ -31,7 +31,7 @@ function HomePage() {
         </div>
         <SolutionStatBoxes />
       </>) : 
-      <SolutionCards solutionsObj={solutionsObj} /> 
+      <SolutionCards solutionsObj={solutionsObj} setIsFound={setIsFound} /> 
     }
 
   </>)

@@ -2,12 +2,12 @@ import { Bar } from "react-chartjs-2";
 // Chart import is Required (DO NOT REMOVE)
 import Chart from 'chart.js/auto';
 
-function BarChart(props) {
-  const quesIds = props.statDataObj.quesIds
+function BarChart({ statDataObj }) {
+  const quesIds = statDataObj.acceptedQuesIds
 
   // may be increased in the future
-  const LeetcodeTotalProblems = 3045
-  const groups = Math.ceil(LeetcodeTotalProblems/100)
+  const LeetcodeTotalProblems = process.env.REACT_APP_LEETCODE_TOTAL_PROBLEMS || 3060
+  const groups = Math.ceil(LeetcodeTotalProblems / 100)
 
   const xAxisValues = Array.from({ length: groups }, (_, i) => `${(i*100 + 1).toString()} - ${((i+1)*100).toString()}`)
   const yAxisValues = Array.from({ length: groups }, () => 0)
@@ -31,7 +31,7 @@ function BarChart(props) {
         display: true,
         title: {
           display: true,
-          text: 'Leetcode question numbers (in increments of 100)',
+          text: 'Leetcode question number (in increments of 100)',
           color: 'black',
           font: {
             size: 22,
@@ -84,7 +84,7 @@ function BarChart(props) {
           else if(value >= 60)
             return '#0099ff' // blue
           else if(value >= 40)
-            return '#00ff99' //'#00ffcc' // green
+            return '#00ff99' // green
           else if(value >= 20)
             return '#ffff4d' // yellow
           return '#ff3333' // red
@@ -101,7 +101,7 @@ function BarChart(props) {
     height: '670px', 
     padding: '10px 0px', 
     margin: '20px 4%',
-    border: '5px solid black',
+    border: '5px solid #444444',
     borderRadius: '5px', 
     backgroundColor: "#f1f1f1"
   }

@@ -10,43 +10,71 @@ async function solutionStatUpdate() {
     console.log(`File Stat Update Started at: ${new Date().toISOString()}`)
 
     const solutions = await Solution.find({})
+
+    let solvedCountCPP = 0;
+    let solvedCountJS = 0;
+    let solvedCountSQL = 0;
+    let partialSolvedCountCPP = 0;
+    const acceptedQuesIds = [];
+    const unacceptedQuesIds = [];
+
+    for(const solution of solutions) {
+      if(solution.language === 'cpp') {
+        if(solution.acceptedSolutions.length > 0) {
+          solvedCountCPP++;
+        } else {
+          partialSolvedCountCPP++;
+        }
+      } else if(solution.language === 'js') {
+        solvedCountJS++;
+      } else if(solution.language === 'sql') {
+        solvedCountSQL++;
+      }
+
+      if(solution.acceptedSolutions.length > 0) {
+        acceptedQuesIds.push(solution.quesId)
+      } else {
+        unacceptedQuesIds.push(solution.quesId)
+      }
+    }
     
-    const quesIds = solutions
-    .filter((sol) => sol.acceptedSolutions.length > 0)
-    .map((sol) => sol.quesId)
+    // const quesIds = solutions
+    // .filter((sol) => sol.acceptedSolutions.length > 0)
+    // .map((sol) => sol.quesId)
 
-    const countCPP = solutions.reduce((acc, sol) => {
-      if(sol.language !== 'cpp' || sol.acceptedSolutions.length === 0)
-        return acc
-      return acc + 1
-    }, 0)
+    // const countCPP = solutions.reduce((acc, sol) => {
+    //   if(sol.language !== 'cpp' || sol.acceptedSolutions.length === 0)
+    //     return acc
+    //   return acc + 1
+    // }, 0)
 
-    const countJS = solutions.reduce((acc, sol) => {
-      if(sol.language !== 'js' || sol.acceptedSolutions.length === 0)
-        return acc
-      return acc + 1
-    }, 0)
+    // const countJS = solutions.reduce((acc, sol) => {
+    //   if(sol.language !== 'js' || sol.acceptedSolutions.length === 0)
+    //     return acc
+    //   return acc + 1
+    // }, 0)
 
-    const countSQL = solutions.reduce((acc, sol) => {
-      if(sol.language !== 'sql' || sol.acceptedSolutions.length === 0)
-        return acc
-      return acc + 1
-    }, 0)
+    // const countSQL = solutions.reduce((acc, sol) => {
+    //   if(sol.language !== 'sql' || sol.acceptedSolutions.length === 0)
+    //     return acc
+    //   return acc + 1
+    // }, 0)
 
-    const partialCountCPP = solutions.reduce((acc, sol) => {
-      if(sol.language !== 'cpp')
-        return acc
-      return sol.acceptedSolutions.length === 0 ? acc + 1 : acc
-    }, 0)
+    // const partialCountCPP = solutions.reduce((acc, sol) => {
+    //   if(sol.language !== 'cpp')
+    //     return acc
+    //   return sol.acceptedSolutions.length === 0 ? acc + 1 : acc
+    // }, 0)
 
     await SolutionStat.deleteMany({})
 
     await SolutionStat.create({
-      countCPP,
-      countJS,
-      countSQL,
-      partialCountCPP,
-      quesIds
+      solvedCountCPP,
+      solvedCountJS,
+      solvedCountSQL,
+      partialSolvedCountCPP,
+      acceptedQuesIds,
+      unacceptedQuesIds
     })
 
     console.log(`File Stat Update Completed at: ${new Date().toISOString()}`) 

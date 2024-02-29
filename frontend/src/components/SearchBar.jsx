@@ -15,6 +15,19 @@ function SearchBar({ setIsFound, setSolutionsObj, setIsError, setErrorMessage })
 
   async function getSolution(quesId) {
     try{
+      // no input entered
+      if(quesId === '') {
+        setIsError(true)
+        setErrorMessage('Please enter a question number !')
+        setIsFound(false)
+        setSolutionsObj({})
+        setSearchTerm('')
+
+        removeError()
+
+        return
+      }
+
       // verify ques id is a integer
       if(isNaN(parseInt(quesId))) {
         setIsError(true)

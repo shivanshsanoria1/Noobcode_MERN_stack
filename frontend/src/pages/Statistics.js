@@ -23,11 +23,12 @@ function Statistics() {
       setIsError(false)
 
       setStatDataObj({
-        countCPP: data.countCPP,
-        countJS: data.countJS,
-        countSQL: data.countSQL,
-        partialCountCPP: data.partialCountCPP,
-        quesIds: data.quesIds
+        solvedCountCPP: data.solvedCountCPP,
+        solvedCountJS: data.solvedCountJS,
+        solvedCountSQL: data.solvedCountSQL,
+        partialSolvedCountCPP: data.partialSolvedCountCPP,
+        acceptedQuesIds: data.acceptedQuesIds,
+        unacceptedQuesIds: data.unacceptedQuesIds
       })
 
       sessionStorage.setItem('solutionStatsObj_local', JSON.stringify(data))

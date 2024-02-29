@@ -5,7 +5,14 @@ import Chart from 'chart.js/auto';
 
 function PieChart({ title, statDataObj, chartType }) {
   // may be increased in the future
-  const LeetcodeTotalProblems = 3045
+  const LeetcodeTotalProblems = process.env.REACT_APP_LEETCODE_TOTAL_PROBLEMS || 3060
+
+  const {
+    solvedCountCPP, 
+    solvedCountJS, 
+    solvedCountSQL, 
+    partialSolvedCountCPP
+  } = statDataObj
 
   const labels = []
   const solvedCounts = []
@@ -17,9 +24,9 @@ function PieChart({ title, statDataObj, chartType }) {
     labels.push('Javascript')
     labels.push('MySQL')
 
-    solvedCounts.push(statDataObj.countCPP)
-    solvedCounts.push(statDataObj.countJS)
-    solvedCounts.push(statDataObj.countSQL)
+    solvedCounts.push(solvedCountCPP)
+    solvedCounts.push(solvedCountJS)
+    solvedCounts.push(solvedCountSQL)
 
     bgColors.push('#33adff') // blue
     bgColors.push('#ffe066') // yellow
@@ -29,9 +36,9 @@ function PieChart({ title, statDataObj, chartType }) {
     labels.push('Partially Solved')
     labels.push('Unsolved')
 
-    const totalSolved = statDataObj.countCPP + statDataObj.countJS + statDataObj.countSQL
-    const totalPartialSolved = statDataObj.partialCountCPP
-    const totalUnsolved = LeetcodeTotalProblems - totalSolved
+    const totalSolved = solvedCountCPP + solvedCountJS + solvedCountSQL
+    const totalPartialSolved = partialSolvedCountCPP
+    const totalUnsolved = LeetcodeTotalProblems - totalSolved - totalPartialSolved
 
     solvedCounts.push(totalSolved)
     solvedCounts.push(totalPartialSolved)

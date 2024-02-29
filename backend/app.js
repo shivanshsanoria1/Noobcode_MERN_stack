@@ -40,7 +40,7 @@ app.listen(PORT, () => {
 })
 
 
-const MONGODB_CONNECTION_URI = process.eventNames.MONGODB_CONNECTION_URI
+const MONGODB_CONNECTION_URI = process.env.MONGODB_CONNECTION_URI
 mongoose
 .connect('mongodb://127.0.0.1:27017/noobcode_local')
 .then(() => {

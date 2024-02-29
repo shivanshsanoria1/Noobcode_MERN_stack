@@ -5,7 +5,7 @@
   flex-direction: column;
   width: 310px;
   height: 180px;
-  border: 2px solid black;
+  border: 2px solid #444444;
   border-radius: 5px;
   margin: 0px 20px;
 }

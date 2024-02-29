@@ -1,25 +1,28 @@
 const { Schema, model } = require('mongoose')
 
 const solutionStatSchema = new Schema({
-  countCPP: {
+  solvedCountCPP: {
     type: Number,
     default: 0
   },
-  countJS: {
+  solvedCountJS: {
     type: Number,
     default: 0
   },
-  countSQL: {
+  solvedCountSQL: {
     type: Number,
     default: 0
   },
-  partialCountCPP: {
+  partialSolvedCountCPP: {
     type: Number,
     default: 0
   },
-  quesIds: [{
+  acceptedQuesIds: [{
     type: Number
   }],
+  unacceptedQuesIds: [{
+    type: Number
+  }]
 }, {
   timestamps: true
 })
