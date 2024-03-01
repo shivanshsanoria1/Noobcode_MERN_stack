@@ -54,38 +54,3 @@
 .navlink:hover{
   color:aquamarine;
 }
-
-
-
-
-
-
-
-
-
-/* .navbar ul{
-  list-style-type: none;
-  background-color: #077c49;
-  padding: 0px;
-  margin: 0px;
-  overflow: hidden;
-}
-
-.navLink {
-  color: ghostwhite;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 28px;
-  padding: 15px 25px;
-  display: block;
-  text-align: center;
-}
-
-.navLink:hover{
-  background-color: #0aae67;
-}
-
-.navbar li{
-  float: left;
-}
- */

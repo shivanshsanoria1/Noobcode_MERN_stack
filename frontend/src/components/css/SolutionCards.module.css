@@ -28,3 +28,8 @@
 .closeBtn:hover{
   opacity: 0.8;
 }
+
+hr{
+  margin: 20px 20%;
+  border: 1px solid #dddddd;
+}

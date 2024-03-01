@@ -2,10 +2,9 @@ import { Pie } from "react-chartjs-2";
 // Chart import is Required (DO NOT REMOVE)
 import Chart from 'chart.js/auto';
 
-
 function PieChart({ title, statDataObj, chartType }) {
   // may be increased in the future
-  const LeetcodeTotalProblems = process.env.REACT_APP_LEETCODE_TOTAL_PROBLEMS || 3060
+  const LeetcodeTotalProblems = process.env.REACT_APP_LEETCODE_TOTAL_PROBLEMS || 3064
 
   const {
     solvedCountCPP, 

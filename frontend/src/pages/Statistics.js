@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-//import classes from './css/Statistics.module.css'
 import PieChart from '../components/PieChart'
 import BarChart from '../components/BarChart'
 import Error from '../components/Error'

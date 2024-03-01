@@ -30,26 +30,6 @@ function NavBar() {
         </ul>
       </div>
     </nav>
-
-    // <nav className={classes.navbar}>
-    //   <ul>
-    //     <li> 
-    //       <Link to="/" className={classes.navLink} >
-    //         NoobCode 
-    //       </Link> 
-    //     </li>
-    //     <li> 
-    //       <Link to="/stats" className={classes.navLink}>
-    //         Statistics 
-    //       </Link> 
-    //     </li>
-    //     <li> 
-    //       <Link to="/about" className={classes.navLink}>
-    //         About 
-    //       </Link> 
-    //     </li>
-    //   </ul>
-    // </nav>
   )
 }
 

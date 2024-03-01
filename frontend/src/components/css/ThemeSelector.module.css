@@ -1,0 +1,29 @@
+.labelContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  padding-bottom: 0;
+}
+
+label{
+  color: white;
+  font-size: 20px;
+}
+
+.selectContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 80px;
+}
+
+select{
+  background-color: #333333;
+  color: white;
+  border-style: none;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 5px 20px;
+}

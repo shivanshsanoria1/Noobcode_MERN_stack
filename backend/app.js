@@ -4,7 +4,6 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 //const cors = require('cors')
-const cron = require('node-cron')
 
 const solutionRoutes = require('./routes/solution')
 const solutionStatsRoutes = require('./routes/solutionStats')
@@ -16,7 +15,10 @@ const PORT = process.env.PORT || 8000
 
 const app = express()
 
-//app.use(cors(corsOptions))
+// allow all origins
+// app.use(cors('*'))
+// allow only specific origins
+// app.use(cors(corsOptions))
 
 app.use(express.json())
 app.use(express.static(path.join(__dirname, 'public')))
@@ -40,7 +42,7 @@ app.listen(PORT, () => {
 })
 
 
-const MONGODB_CONNECTION_URI = process.env.MONGODB_CONNECTION_URI
+//const MONGODB_CONNECTION_URI = process.env.MONGODB_CONNECTION_URI
 mongoose
 .connect('mongodb://127.0.0.1:27017/noobcode_local')
 .then(() => {
@@ -51,10 +53,4 @@ mongoose
   console.log(err)
 });
 
-// sync all solutions with database at 00:00:00 everyday
-cron.schedule('0 0 0 * * *', () => {
-  console.log(`Cron Job Started at: ${new Date().toISOString()}`)
-  syncAllSolutions()
-})
-
-//syncAllSolutions()
+syncAllSolutions()
