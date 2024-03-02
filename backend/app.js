@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/solutions', solutionRoutes)
 app.use('/solution-stats', solutionStatsRoutes)
 
-// Serve frontend
+// Serve frontend in production mode
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../frontend/build')));
 
@@ -41,10 +41,11 @@ app.listen(PORT, () => {
   console.log(`Server Started at port ${PORT} at time: ${new Date().toISOString()}`)
 })
 
+const MONGODB_LOCAL_DB_NAME = process.env.MONGODB_LOCAL_DB_NAME || 'noobcode_local'
+const MONGODB_CONNECTION_URI = process.env.MONGODB_CONNECTION_URI || `mongodb://127.0.0.1:27017/${MONGODB_LOCAL_DB_NAME}`
 
-//const MONGODB_CONNECTION_URI = process.env.MONGODB_CONNECTION_URI
 mongoose
-.connect('mongodb://127.0.0.1:27017/noobcode_local')
+.connect(MONGODB_CONNECTION_URI)
 .then(() => {
 	console.log(`mongodb connected at: ${new Date().toISOString()}`)
 })
@@ -53,4 +54,6 @@ mongoose
   console.log(err)
 });
 
-syncAllSolutions()
+if(process.env.SYNC_FILES === 'true'){
+  syncAllSolutions()
+}
