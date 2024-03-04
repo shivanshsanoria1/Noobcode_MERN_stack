@@ -6,7 +6,7 @@ function BarChart({ statDataObj }) {
   const quesIds = statDataObj.acceptedQuesIds
 
   // may be increased in the future
-  const LeetcodeTotalProblems = process.env.REACT_APP_LEETCODE_TOTAL_PROBLEMS || 3064
+  const LeetcodeTotalProblems = process.env.REACT_APP_LEETCODE_TOTAL_PROBLEMS || 3072
   const groups = Math.ceil(LeetcodeTotalProblems / 100)
 
   const xAxisValues = Array.from({ length: groups }, (_, i) => `${(i*100 + 1).toString()} - ${((i+1)*100).toString()}`)

@@ -3,22 +3,22 @@ const path = require('path')
 require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
-//const cors = require('cors')
+const cors = require('cors')
 
+const dbConnection = require('./config/dbConnection')
+const corsOptions = require('./config/corsOptions')
 const solutionRoutes = require('./routes/solution')
 const solutionStatsRoutes = require('./routes/solutionStats')
-const { get404 } = require('./middleware/errorHandler')
-//const { corsOptions } = require('./config/corsOptions')
-const { syncAllSolutions } = require('./util/syncAllSolutions')
+const errorHandler  = require('./middleware/errorHandler')
+const syncAllSolutions = require('./util/syncAllSolutions')
 
 const PORT = process.env.PORT || 8000
 
 const app = express()
 
-// allow all origins
-// app.use(cors('*'))
-// allow only specific origins
-// app.use(cors(corsOptions))
+if(process.env.NODE_ENV !== 'production') {
+  app.use(cors(corsOptions))
+}
 
 app.use(express.json())
 app.use(express.static(path.join(__dirname, 'public')))
@@ -35,24 +35,17 @@ if (process.env.NODE_ENV === 'production') {
   )
 }
 
-app.all('*', get404)
+app.use(errorHandler)
 
 app.listen(PORT, () => {
-  console.log(`Server Started at port ${PORT} at time: ${new Date().toISOString()}`)
+  console.log(`Server Started in ${process.env.NODE_ENV} mode at port ${PORT} at time: ${new Date().toISOString()}`)
 })
 
-const MONGODB_LOCAL_DB_NAME = process.env.MONGODB_LOCAL_DB_NAME || 'noobcode_local'
-const MONGODB_CONNECTION_URI = process.env.MONGODB_CONNECTION_URI || `mongodb://127.0.0.1:27017/${MONGODB_LOCAL_DB_NAME}`
+dbConnection()
 
-mongoose
-.connect(MONGODB_CONNECTION_URI)
-.then(() => {
-	console.log(`mongodb connected at: ${new Date().toISOString()}`)
+mongoose.connection.once('open', () => {
+  console.log(`mongodb connected at: ${new Date().toISOString()}`)
 })
-.catch((err) => {
-  console.log('MONGODB CONNECTION ERROR')
-  console.log(err)
-});
 
 if(process.env.SYNC_FILES === 'true'){
   syncAllSolutions()

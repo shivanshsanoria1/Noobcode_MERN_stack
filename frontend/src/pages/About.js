@@ -51,7 +51,7 @@ function AboutPage() {
       Multiple solutions are available here for various problems to help you find different ways to approach the problem.
       </div>
       <div className={classes.content}>
-        Solutions are arranged in order from least optimized to most optimized.
+        Solutions are arranged in order from least optimized to most optimized for progressive learning.
       </div>
       <div className={classes.content}>
       Don't underestimate the power of Brute-force / Unaccepted solutions, analyze them and try to find a way to optimize to reach to the Accepted version.

@@ -42,9 +42,9 @@ Add the following variables inside it:
 1. NODE_ENV (set the value to **development** or **production**, depending on the use case)
 * #### Not-Required
 1. PORT (custom port to run the nodejs server like 8001; default is 8000)
-1. MONGODB_LOCAL_DB_NAME (custom name for the mongodb local database, default is **noobcode_local**)
+1. MONGODB_LOCAL_DB_NAME (custom name for the mongodb local database, default name is **noobcode_local**)
 1. MONGODB_CONNECTION_URI (connection URI to connect to mongodb remote database, default action is to connect to a local mongodb database named **noobcode_local**)
-1. SYNC_FILES (set the value to **true** for synchronizing files in the **LeetcodeSolutions** directory with the database)
+1. SYNC_FILES (set the value to **true** for synchronizing files in the **LeetcodeSolutions** directory with the database; default behavior is to not sync the files)
 
 
 ### Inside the **frontend** directory create a file named '.env'
@@ -52,10 +52,10 @@ Add the following variables inside it:
 Add the following variables inside it:
 * #### Not-Required
 1. REACT_APP_BACKEND_ORIGIN (only needed in development mode, custom Origin of nodejs server like **http://localhost:8001**; default is **http://localhost:8000**)
-1. REACT_APP_LEETCODE_TOTAL_PROBLEMS (total number of problems available on [leetcode.com](https://leetcode.com/problemset/ "leetcode"); default is 3064)
+1. REACT_APP_LEETCODE_TOTAL_PROBLEMS (total number of problems available on [leetcode.com](https://leetcode.com/problemset/ "leetcode"); default is 3072)
 
 ---
-## Setting up the solutions directory (cloning)
+## Setting up the solutions directory (cloning method)
 Inside the **backend** directory:
 ```bash
 git clone https://github.com/shivanshsanoria1/LeetcodeSolutions_Noobcode.git
@@ -63,7 +63,7 @@ git clone https://github.com/shivanshsanoria1/LeetcodeSolutions_Noobcode.git
 Rename the directory from **LeetcodeSolutions_Noobcode** to **LeetcodeSolutions**.
 
 ---
-## Setting up the solutions directory (manually)
+## Setting up the solutions directory (manual method)
 Inside the **backend** directory:
 
 Create a directory named **LeetcodeSolutions** with 3 directories inside it:

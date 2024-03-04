@@ -24,7 +24,7 @@ function ThemeSelector({ startTheme, setTheme }) {
 
   return (<>
     <div className={classes.labelContainer}>
-      <label for='selectTheme'> Select a Theme </label>
+      <label htmlFor='selectTheme'> Select a Theme </label>
     </div>
 
     <div className={classes.selectContainer}>

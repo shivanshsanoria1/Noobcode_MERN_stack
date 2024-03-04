@@ -151,4 +151,4 @@ async function syncAllSolutions() {
   }
 }
 
-module.exports = { syncAllSolutions }
+module.exports = syncAllSolutions
