@@ -60,11 +60,27 @@ async function solutionStatUpdate() {
 function readAllFiles() {
   return new Promise(async (resolve, reject) => {
     try{
-      const solutionsDirPath_cpp = path.join(__dirname, '..', 'LeetcodeSolutions', 'cpp')
-      const solutionsDirPath_js = path.join(__dirname, '..', 'LeetcodeSolutions', 'js')
-      const solutionsDirPath_sql = path.join(__dirname, '..', 'LeetcodeSolutions', 'sql')
+      const solutionsDirPath_cpp_1_500 = path.join(__dirname, '..', '..', 'LeetcodeSolutions', 'CPP [1-500]')
+      const solutionsDirPath_cpp_501_1000 = path.join(__dirname, '..', '..', 'LeetcodeSolutions', 'CPP [501-1000]')
+      const solutionsDirPath_cpp_1001_1500 = path.join(__dirname, '..', '..','LeetcodeSolutions', 'CPP [1001-1500]')
+      const solutionsDirPath_cpp_1501_2000 = path.join(__dirname, '..', '..', 'LeetcodeSolutions', 'CPP [1501-2000]')
+      const solutionsDirPath_cpp_2001_2500 = path.join(__dirname, '..', '..', 'LeetcodeSolutions', 'CPP [2001-2500]')
+      const solutionsDirPath_cpp_2501_3000 = path.join(__dirname, '..', '..', 'LeetcodeSolutions', 'CPP [2501-3000]')
+      const solutionsDirPath_cpp_3001_3500 = path.join(__dirname, '..', '..', 'LeetcodeSolutions', 'CPP [3001-3500]')
+      const solutionsDirPath_js = path.join(__dirname, '..', '..', 'LeetcodeSolutions', 'JS')
+      const solutionsDirPath_sql = path.join(__dirname, '..', '..', 'LeetcodeSolutions', 'SQL')
   
-      const solutionsDirPaths = [solutionsDirPath_cpp, solutionsDirPath_js, solutionsDirPath_sql]
+      const solutionsDirPaths = [
+        solutionsDirPath_cpp_1_500,
+        solutionsDirPath_cpp_501_1000,
+        solutionsDirPath_cpp_1001_1500,
+        solutionsDirPath_cpp_1501_2000,
+        solutionsDirPath_cpp_2001_2500,
+        solutionsDirPath_cpp_2501_3000,
+        solutionsDirPath_cpp_3001_3500,
+        solutionsDirPath_js, 
+        solutionsDirPath_sql
+      ]
   
       const solutionsMap = new Map([])
   
@@ -141,7 +157,7 @@ async function syncAllSolutions() {
 
     console.log(`File Sync Completed at: ${new Date().toISOString()}`)
     const endTime = Date.now()
-    console.log(`Time Taken to Sync Files = ${Math.ceil((endTime - startTime)/1000)} seconds`)
+    console.log(`Time Taken to Sync Files = ${endTime - startTime} ms`)
 
     solutionStatUpdate() 
 

@@ -5,9 +5,9 @@ A full-stack website to find solutions of various problems from [leetcode.com](h
 
 ## Installation Prerequisites
 The following are required for downloading and running this project.
-* git
-* node
-* npm
+* git (to clone the repository from github)
+* node (to run the application)
+* npm (to install the dependencies)
 * mongodb (only needed if you want to use a local database, not required for remote database)
 
 ---
@@ -52,42 +52,52 @@ Add the following variables inside it:
 Add the following variables inside it:
 * #### Not-Required
 1. REACT_APP_BACKEND_ORIGIN (only needed in development mode, custom Origin of nodejs server like **http://localhost:8001**; default is **http://localhost:8000**)
-1. REACT_APP_LEETCODE_TOTAL_PROBLEMS (total number of problems available on [leetcode.com](https://leetcode.com/problemset/ "leetcode"); default is 3072)
+1. REACT_APP_LEETCODE_TOTAL_PROBLEMS (total number of problems available on [leetcode.com](https://leetcode.com/problemset/ "leetcode"); default is 3077)
 
 ---
 ## Setting up the solutions directory (cloning method)
-Inside the **backend** directory:
+Inside the base directory:
 ```bash
-git clone https://github.com/shivanshsanoria1/LeetcodeSolutions_Noobcode.git
+git clone https://github.com/shivanshsanoria1/LeetcodeSolutions.git
 ```
-Rename the directory from **LeetcodeSolutions_Noobcode** to **LeetcodeSolutions**.
 
 ---
 ## Setting up the solutions directory (manual method)
-Inside the **backend** directory:
+Inside the base directory:
 
-Create a directory named **LeetcodeSolutions** with 3 directories inside it:
-1. **cpp** (all files inside must have **.cpp** extension)
-2. **js** (all files inside must have **.js** extension)
-3. **sql** (all files inside must have **.sql** extension)
+Create a directory named **LeetcodeSolutions** with the following directories inside it:
+1. **CPP [1-500]** (all files inside must have **.cpp** extension)
+1. **CPP [501-1000]** (all files inside must have **.cpp** extension)
+1. **CPP [1001-1500]** (all files inside must have **.cpp** extension)
+1. **CPP [1501-2000]** (all files inside must have **.cpp** extension)
+1. **CPP [2001-2500]** (all files inside must have **.cpp** extension)
+1. **CPP [2501-3000]** (all files inside must have **.cpp** extension)
+1. **CPP [3001-3500]** (all files inside must have **.cpp** extension)
+1. **JS** (all files inside must have **.js** extension)
+1. **SQL** (all files inside must have **.sql** extension)
 
 ### File naming convention
 
 * #### Accepted solutions
-  <**Quesion Number**>.<**Title (with underscore instead of whitespace)**> <**[version]**>.<**extension**>
-  ##### Samples 
+  <**Quesion Number**>.<**Title**> <**[version]**>.<**extension**>
+  ##### Samples:
    * 1234.the_is_a_sample_question [1].cpp
    * 1234.the_is_a_sample_question [2].cpp
    * 1234.the_is_a_sample_question [3].cpp
 
 
 * #### Unaccepted solutions
-  <**Quesion Number**>.<**Title (with underscore instead of whitespace)**> <**[TLE** or   **MLE]**> <**[version]**>.<**extension**>
+  <**Quesion Number**>.<**Title**> <**[TLE** or   **MLE]**> <**[version]**>.<**extension**>
 
-  ##### Samples
+  ##### Samples:
    * 1234.the_is_a_sample_question [TLE] [1].cpp
    * 1234.the_is_a_sample_question [TLE] [2].cpp
    * 1234.the_is_a_sample_question [MLE] [3].cpp
+
+#### NOTE:
+1. **Title** must have underscore instead of whitespace.
+1. **version** must be an integer value in range 1 to 9 (both inclusive).
+
 ---
 
 ## Development Built

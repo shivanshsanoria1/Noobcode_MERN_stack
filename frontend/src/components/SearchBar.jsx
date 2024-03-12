@@ -5,11 +5,13 @@ import baseUrl from '../config/baseUrl';
 
 function SearchBar({ setIsFound, setSolutionsObj, setIsError, setErrorMessage }) {
   const [searchTerm, setSearchTerm] = useState('')
+  const [disableInput, setDisableInput] = useState(false)
 
-  function removeError(time = 5000){
+  function removeError(time = 4000){
     setTimeout(() => {
       setIsError(false)
       setErrorMessage('')
+      setDisableInput(false)
     }, time)
   }
 
@@ -22,6 +24,7 @@ function SearchBar({ setIsFound, setSolutionsObj, setIsError, setErrorMessage })
         setIsFound(false)
         setSolutionsObj({})
         setSearchTerm('')
+        setDisableInput(true)
 
         removeError()
 
@@ -35,6 +38,7 @@ function SearchBar({ setIsFound, setSolutionsObj, setIsError, setErrorMessage })
         setIsFound(false)
         setSolutionsObj({})
         setSearchTerm('')
+        setDisableInput(true)
 
         removeError()
 
@@ -64,6 +68,7 @@ function SearchBar({ setIsFound, setSolutionsObj, setIsError, setErrorMessage })
         setIsFound(false)
         setSolutionsObj({})
         setSearchTerm('')
+        setDisableInput(true)
         
         removeError()
 
@@ -104,9 +109,13 @@ function SearchBar({ setIsFound, setSolutionsObj, setIsError, setErrorMessage })
       placeholder='Enter Leetcode Question Number'
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
-      onKeyDown={(e) => e.keyCode === 13 ? getSolution(searchTerm) : null}
+      onKeyDown={(e) => e.key === 'Enter' ? getSolution(searchTerm) : null}
+      disabled={disableInput}
       />
-      <button onClick={() => getSolution(searchTerm)}>
+      <button 
+      onClick={() => getSolution(searchTerm)}
+      disabled={disableInput}
+      >
         Search
       </button>
     </div>

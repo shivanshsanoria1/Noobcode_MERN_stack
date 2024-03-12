@@ -1,16 +1,17 @@
 .searchBarContainer{
-  color: #cccccc;
-  width: 600px;
-  height: 50px;
   display: flex;
   align-content: center;
   justify-content: center;
-  margin: 20px 30%;
+  color: #cccccc;
+  width: 100%;
+  height: 50px;
+  margin: 20px 0;
   border-radius: 10px;
 }
 
 .searchBarContainer input{
-  flex: 1;
+  /* flex: 1; */
+  width: 35%;
   border: none;
   outline: none;
   font-size: 18px;
@@ -19,13 +20,54 @@
 }
 
 .searchBarContainer button{
+  width: 10%;
   background-color: #f2690d;
   color: white;
-  padding: 10px 40px;
+  padding: 10px 10px;
   border: none;
   outline: none;
   letter-spacing: 1px;
   cursor: pointer;
   font-size: 20px;
   border-radius: 0px 10px 10px 0px;
+}
+
+.searchBarContainer button:hover {
+  opacity: 0.92;
+}
+
+.searchBarContainer button:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+/* ---------- Media Queries ---------- */
+
+@media screen and (max-width: 1200px) {
+  .searchBarContainer input{
+    width: 40%;
+  }
+
+  .searchBarContainer button{
+    width: 14%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .searchBarContainer input{
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .searchBarContainer input{
+    width: 60%;
+    font-size: 16px;
+  }
+
+  .searchBarContainer button{
+    width: 16%;
+    padding: 5px 5px;
+    font-size: 16px;
+  }
 }

@@ -6,7 +6,7 @@ function BarChart({ statDataObj }) {
   const quesIds = statDataObj.acceptedQuesIds
 
   // may be increased in the future
-  const LeetcodeTotalProblems = process.env.REACT_APP_LEETCODE_TOTAL_PROBLEMS || 3072
+  const LeetcodeTotalProblems = process.env.REACT_APP_LEETCODE_TOTAL_PROBLEMS || 3077
   const groups = Math.ceil(LeetcodeTotalProblems / 100)
 
   const xAxisValues = Array.from({ length: groups }, (_, i) => `${(i*100 + 1).toString()} - ${((i+1)*100).toString()}`)
@@ -85,9 +85,11 @@ function BarChart({ statDataObj }) {
             return '#0099ff' // blue
           else if(value >= 40)
             return '#00ff99' // green
-          else if(value >= 20)
+          else if(value >= 30)
             return '#ffff4d' // yellow
-          return '#ff3333' // red
+          else if(value >= 20)
+            return '#ff9933' // orange
+          return '#ff4d4d' // red
         }
       }
     }

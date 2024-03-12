@@ -27,16 +27,16 @@ a{
 }
 
 a:link{
-  color: pink;
+  color: plum;
 }
 a:visited{
-  color: pink;
+  color: plum;
 }
 a:active{
   color: tomato;
 }
 a:hover{
-  color: yellowgreen;
+  color: pink;
 }
 
 .line{

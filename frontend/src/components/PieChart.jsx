@@ -4,7 +4,7 @@ import Chart from 'chart.js/auto';
 
 function PieChart({ title, statDataObj, chartType }) {
   // may be increased in the future
-  const LeetcodeTotalProblems = process.env.REACT_APP_LEETCODE_TOTAL_PROBLEMS || 3072
+  const LeetcodeTotalProblems = process.env.REACT_APP_LEETCODE_TOTAL_PROBLEMS || 3077
 
   const {
     solvedCountCPP, 

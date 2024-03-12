@@ -3,15 +3,41 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 310px;
+  width: 300px;
   height: 180px;
   border: 2px solid #444444;
   border-radius: 5px;
   margin: 0px 20px;
 }
 
+.box:hover {
+  border-width: 3px;
+}
+
 .boxItem{
   font-size: 30px;
   color: white;
-  margin: 6px 0px;
+  padding: 6px 0px;
+}
+
+/* ---------- Media Queries ---------- */
+
+@media screen and (max-width: 992px) {
+  .box{
+    margin: 0px 10px;
+  }
+
+  .boxItem{
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .box{
+    margin-bottom: 10px;
+  }
+
+  .boxItem{
+    font-size: 30px;
+  }
 }

@@ -44,7 +44,7 @@ app.listen(PORT, () => {
 dbConnection()
 
 mongoose.connection.once('open', () => {
-  console.log(`mongodb connected at: ${new Date().toISOString()}`)
+  console.log(`Mongodb Connected at: ${new Date().toISOString()}`)
 })
 
 if(process.env.SYNC_FILES === 'true'){

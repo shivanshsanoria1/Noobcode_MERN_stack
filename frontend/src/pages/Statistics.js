@@ -46,7 +46,7 @@ function Statistics() {
   const pieChartsStyles = {
     display: 'flex',
     justifyContent: 'center',
-    aligItems: 'right',
+    aligItems: 'center',
     margin: '10px 0px',
   }
 

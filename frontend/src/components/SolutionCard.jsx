@@ -6,13 +6,12 @@ import { a11yDark, atomDark, coldarkDark, dracula, gruvboxDark, hopscotch, lucar
   materialOceanic, nightOwl, nord, okaidia, oneDark, solarizedDarkAtom, tomorrow, twilight, zTouch } 
   from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-import { CopyToClipboard } from "react-copy-to-clipboard"
-
 import copyLogo from '../logos/copy_logo.svg'
 import classes from './css/SolutionCard.module.css'
 
 function SolutionCard({ solution, language, isAccepted, solutionNum }) {
   const [isCopied, setIsCopied] = useState(false)
+  const [isBtnDisabled, setIsBtnDisabled] = useState(false)
 
   const languageHighlight = language === 'js' ? 'javascript' : language
 
@@ -55,24 +54,26 @@ function SolutionCard({ solution, language, isAccepted, solutionNum }) {
     <div className={isAccepted ? classes.acceptedSolutionContainer : classes.unacceptedSolutionContainer}>
       <div>
         <h2 className={isAccepted ? classes.methodContainerAccepted : classes.methodContainerNotAccepted}>
-          Method [{solutionNum}] ({isAccepted ? 'Accepted' : 'Not Accepted'})
-          <CopyToClipboard text={solution}>
-            <button className={classes.copyBtn}
-            onClick={() => {
-              setIsCopied(true)
-              setTimeout(() => {
-                setIsCopied(false)
-              }, 3000);
-            }}>
-              {
-                isCopied
-                ? <span>Copied...</span>
-                : <span title='Copy'>
-                    <img src={copyLogo} alt='Copy' className={classes.copyLogo} />
-                  </span>
-              }
-            </button>
-          </CopyToClipboard>
+        Method [{solutionNum}] ({isAccepted ? 'Accepted' : 'Not Accepted'})
+          <button className={classes.copyBtn}
+          disabled={isBtnDisabled}
+          onClick={() => {
+            navigator.clipboard.writeText(solution)
+            setIsCopied(true)
+            setIsBtnDisabled(true)
+            setTimeout(() => {
+              setIsCopied(false)
+              setIsBtnDisabled(false)
+            }, 3000);
+          }}>
+            {
+              isCopied
+              ? <span>Copied...</span>
+              : <span title='Copy'>
+                  <img src={copyLogo} alt='Copy' className={classes.copyLogo} />
+                </span>
+            }
+          </button>
         </h2>
       </div>
 
