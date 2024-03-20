@@ -11,7 +11,6 @@ import classes from './css/SolutionCard.module.css'
 
 function SolutionCard({ solution, language, isAccepted, solutionNum }) {
   const [isCopied, setIsCopied] = useState(false)
-  const [isBtnDisabled, setIsBtnDisabled] = useState(false)
 
   const languageHighlight = language === 'js' ? 'javascript' : language
 
@@ -56,14 +55,14 @@ function SolutionCard({ solution, language, isAccepted, solutionNum }) {
         <h2 className={isAccepted ? classes.methodContainerAccepted : classes.methodContainerNotAccepted}>
         Method [{solutionNum}] ({isAccepted ? 'Accepted' : 'Not Accepted'})
           <button className={classes.copyBtn}
-          disabled={isBtnDisabled}
-          onClick={() => {
-            navigator.clipboard.writeText(solution)
+          disabled={isCopied}
+          onClick={async () => {
+            // during deployment this will not work over http connection
+            // as it requires https connection
+            await navigator.clipboard.writeText(solution)
             setIsCopied(true)
-            setIsBtnDisabled(true)
             setTimeout(() => {
               setIsCopied(false)
-              setIsBtnDisabled(false)
             }, 3000);
           }}>
             {
