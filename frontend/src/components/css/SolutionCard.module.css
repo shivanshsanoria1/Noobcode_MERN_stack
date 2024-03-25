@@ -4,8 +4,8 @@
   padding: 5px;
   padding-bottom: 0;
   margin-bottom: 10px;
-  margin-left: 10%;
-  margin-right: 10%;
+  /* margin-left: 10%;
+  margin-right: 10%; */
 }
 
 .unacceptedSolutionContainer{
@@ -14,8 +14,8 @@
   padding: 5px;
   padding-bottom: 0;
   margin-bottom: 10px;
-  margin-left: 10%;
-  margin-right: 10%;
+  /* margin-left: 10%;
+  margin-right: 10%; */
 }
 
 .methodContainerAccepted{
@@ -45,7 +45,7 @@
 .copyBtn{
   float: right;
   background-color: transparent;
-  color: black;
+  color: white;
   font-weight: bold;
   font-size: 16px;
   padding: 4px 10px;
@@ -55,8 +55,9 @@
 }
 
 .copyBtn:hover{
-  background-color: palegoldenrod;
+  background-color: #75a3a3;
   cursor: pointer;
+
 }
 
 .copyBtn:disabled {

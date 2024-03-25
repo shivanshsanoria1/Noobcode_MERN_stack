@@ -3,7 +3,7 @@ import classes from './css/SolutionCards.module.css'
 import SolutionCard from "./SolutionCard"
 import ThemeSelector from './ThemeSelector'
 
-function SolutionsCard({ solutionsObj, setIsFound }) {
+function SolutionCards({ solutionsObj }) {
   const startTheme = JSON.parse(localStorage.getItem('theme_local'))
   
   const [theme, setTheme] = useState(startTheme ? startTheme : 'okaidia')
@@ -27,9 +27,7 @@ function SolutionsCard({ solutionsObj, setIsFound }) {
     }, 100);
   }, [theme])
 
-  return (<> 
-    <button className={classes.closeBtn} onClick={() => setIsFound(false)}> X </button>
-
+  return (<>
     <div className={classes.titleContainer}>
       <h1 className={classes.titleHead}>{quesId}{'. '}{formattedTitle}</h1>
     </div>
@@ -63,4 +61,4 @@ function SolutionsCard({ solutionsObj, setIsFound }) {
   </>)
 }
 
-export default SolutionsCard
+export default SolutionCards

@@ -16,7 +16,7 @@ label{
   justify-content: center;
   align-items: center;
   padding: 10px;
-  margin-bottom: 80px;
+  /* margin-bottom: 50px; */
 }
 
 select{
