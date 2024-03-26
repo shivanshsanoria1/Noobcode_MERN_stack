@@ -1,12 +1,8 @@
 import { useEffect, useState } from 'react'
 import classes from './css/SolutionCards.module.css'
 import SolutionCard from "./SolutionCard"
-import ThemeSelector from './ThemeSelector'
 
-function SolutionCards({ solutionsObj }) {
-  const startTheme = JSON.parse(localStorage.getItem('theme_local'))
-  
-  const [theme, setTheme] = useState(startTheme ? startTheme : 'okaidia')
+function SolutionCards({ solutionsObj, theme }) {
   const [loadSolutions, setLoadSolutions] = useState(true)
 
   const { quesId, title, acceptedSolutions, unacceptedSolutions, language } = solutionsObj
@@ -56,7 +52,6 @@ function SolutionCards({ solutionsObj }) {
         })
       }
       <hr />
-      <ThemeSelector startTheme={startTheme} setTheme={setTheme} />
     </> : (<></>) }
   </>)
 }

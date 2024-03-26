@@ -9,12 +9,12 @@ function AboutPage() {
   const myContactEmail = 'contact_noobcode@gmail.com'
 
   return (
-    <div className={classes.container}>
+    <div className={classes.aboutContainer}>
       <div className={classes.heading}>
         About
       </div>
       <div className={classes.content}>
-        NoobCode is a simple and ad-free website to find solutions of various problems from 
+        NoobCode is a free and simple website to find solutions of most problems from 
         <a href="https://leetcode.com/problemset/" target="_blank" rel="noopener noreferrer">leetcode.com</a>
       </div>
       <br/>
@@ -35,11 +35,11 @@ function AboutPage() {
         </ul>
       </div>
       <div className={classes.content}>
-        This MERN stack (MongoDB, Express.js, React, Node.js) website and all the solutions found here are developed by me.
+        This MERN stack (MongoDB, Express.js, React, Node.js) website and all the solutions found here are developed by 
+        <a href={myLinkedinLink} target="_blank" rel="noopener noreferrer">me</a>.
       </div>
 
-      <br/>
-      <br/>
+      <hr className={classes.leftLine} />
 
       <div className={classes.heading}>
         How to use ?
@@ -48,20 +48,22 @@ function AboutPage() {
         Just enter the question number which you are stuck at in the search bar to get the solutions. No need to create an account just start learning.
       </div>
       <div className={classes.content}>
-      Multiple solutions are available here for various problems to help you find different ways to approach the problem.
+        The code found here are well commented to explain their working and can be well understood even if you are coming from a different language like Java, Python etc. 
       </div>
       <div className={classes.content}>
-        Solutions are arranged in order from least optimized to most optimized for progressive learning.
+        Multiple solutions are available here for various problems to help you find different ways to approach the problem.
       </div>
       <div className={classes.content}>
-      Don't underestimate the power of Brute-force / Unaccepted solutions, analyze them and try to find a way to optimize to reach to the Accepted version.
+        Solutions are arranged in order from least to most optimized or most to least intuitive for progressive learning.
       </div>
       <div className={classes.content}>
-      The best way to learn is to use the solutions found here only as a reference. Just copy pasting the code won't help you learn.
+        Don't underestimate the power of Brute-force / Unaccepted solutions, analyze them before moving to the Optimized / Accepted version.
+      </div>
+      <div className={classes.content}>
+        The best way to learn is to use the solutions found here only as a reference. Just copy pasting the code won't help you learn.
       </div>
 
-      <br/>
-      <br/>
+      <hr className={classes.leftLine} />
 
       <div className={classes.heading}>
         Contact
@@ -70,11 +72,11 @@ function AboutPage() {
         Incase you find any solution to be wrong, not working, report bugs or any other suggestion.
       </div>
       <div className={classes.content}>
-      Please send an email at: { myContactEmail }
+        Please send an email at : { myContactEmail }
       </div>
 
       <br/>
-      <hr className={classes.line} />
+      <hr className={classes.centerLine} />
       
       <div className={classes.logos}>
         <a href={`mailto:${myContactEmail}?subject=Feedback`}>

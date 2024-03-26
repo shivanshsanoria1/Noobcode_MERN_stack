@@ -17,6 +17,10 @@ const solutionStatSchema = new Schema({
     type: Number,
     default: 0
   },
+  maxQuesId: {
+    type: Number,
+    default: 0
+  },
   acceptedQuesIds: [{
     type: Number
   }],

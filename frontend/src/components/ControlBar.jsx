@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from 'react'
-//import ThemeSelector from './ThemeSelector'
+import ThemeSelector from './ThemeSelector'
 import classes from './css/ControlBar.module.css'
 import closeBtnLogo from '../logos/close_btn_logo.svg'
 import prevBtnLogo from '../logos/prev_btn_logo.svg'
 import nextBtnLogo from '../logos/next_btn_logo.svg'
 
-function ControlBar({ setIsFound, controlIndex, setControlIndex, setLoadSolutionCards, setSolutionsObj }) {
+function ControlBar(props) {
+  const {
+    setIsFound, 
+    controlIndex, 
+    setControlIndex, 
+    setLoadSolutionCards, 
+    setSolutionsObj, 
+    theme, 
+    setTheme
+  } = props
+
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(true)
   const [nextBtnEnabled, setNextBtnEnabled] = useState(true)
 
@@ -83,36 +93,44 @@ function ControlBar({ setIsFound, controlIndex, setControlIndex, setLoadSolution
     setIsFound(false)
   }
 
-  return (<div className={classes.controlBarContainer}>
-    <div className={classes.themeSelectorContainer}>
+  return (
+    <div className={classes.controlBarContainer}>
+      <div className={classes.themeSelectorContainer}>
+        <ThemeSelector theme={theme} setTheme={setTheme} /> 
+      </div>
 
+      <div className={classes.navBtnsContainer}> 
+        <span title='Previous'>
+          <button 
+          onClick={prevClickHandler} 
+          disabled={!prevBtnEnabled} 
+          className={classes.prevBtn}> 
+            <img src={prevBtnLogo} alt='Prev' className={classes.logo} />
+          </button>
+        </span>
+
+        
+        <span title='Next'>
+          <button 
+          onClick={nextClickHandler} 
+          disabled={!nextBtnEnabled} 
+          className={classes.nextBtn}>
+            <img src={nextBtnLogo} alt='Next' className={classes.logo} />
+          </button>
+        </span>
+      </div>
+
+      <div className={classes.closeBtnContainer}>
+        <span title='Close'>
+          <button 
+          onClick={closeClickHandler} 
+          className={classes.closeBtn}>
+            <img src={closeBtnLogo} alt='Close' className={classes.logo} />
+          </button>
+        </span>
+      </div>
     </div>
-
-    <div className={classes.navBtnsContainer}> 
-      <button 
-      onClick={prevClickHandler} 
-      disabled={!prevBtnEnabled} 
-      className={classes.prevBtn}> 
-        <img src={prevBtnLogo} alt='Prev' className={classes.logo}></img> 
-      </button>
-
-      <button 
-      onClick={nextClickHandler} 
-      disabled={!nextBtnEnabled} 
-      className={classes.nextBtn}>
-        <img src={nextBtnLogo} alt='Next' className={classes.logo}></img> 
-      </button>
-    </div>
-
-    <div className={classes.closeBtnContainer}>
-      <button 
-      onClick={closeClickHandler} 
-      className={classes.closeBtn}> 
-        <img src={closeBtnLogo} alt='Close' className={classes.logo}></img>
-      </button>
-    </div>
-
-  </div>)
+  )
 }
 
 export default ControlBar

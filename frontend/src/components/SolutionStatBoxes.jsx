@@ -15,24 +15,21 @@ function SolutionStatBoxes() {
       const data = await response.json()
       
       setIsError(false)
+      setSolutionStatsObj(data)
 
-      setSolutionStatsObj((prevState) => {
-        const newState = { ...prevState, ...data }
-        sessionStorage.setItem('solutionStatsObj_local', JSON.stringify(newState))
-        return newState
-      })
-      
+      sessionStorage.setItem('solutionStatsObj_local', JSON.stringify(data))
     }catch(err){
       setIsError(true)
-      console.log(err)
+
+      console.error(err)
     }
   }
 
   useEffect(() => {
-    if(sessionStorage.getItem('solutionStatsObj_local')){
+    if(sessionStorage.getItem('solutionStatsObj_local')) {
       setIsError(false)
       setSolutionStatsObj(JSON.parse(sessionStorage.getItem('solutionStatsObj_local')))
-    }else{
+    } else {
       getSolutionStats()
     }
   }, [])
@@ -48,7 +45,7 @@ function SolutionStatBoxes() {
             <SolutionStatBox language='JS'solvedCount={solutionStatsObj.solvedCountJS} />
             <SolutionStatBox language='SQL' solvedCount={solutionStatsObj.solvedCountSQL} />
           </>
-        ) : ( <></> )
+        ) : (<></>)
       }
     </div>
   </>)

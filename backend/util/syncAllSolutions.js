@@ -11,12 +11,13 @@ async function solutionStatUpdate() {
 
     const solutions = await Solution.find({})
 
-    let solvedCountCPP = 0;
-    let solvedCountJS = 0;
-    let solvedCountSQL = 0;
-    let partialSolvedCountCPP = 0;
-    const acceptedQuesIds = [];
-    const unacceptedQuesIds = [];
+    let solvedCountCPP = 0
+    let solvedCountJS = 0
+    let solvedCountSQL = 0
+    let partialSolvedCountCPP = 0
+    let maxQuesId = 0
+    const acceptedQuesIds = []
+    const unacceptedQuesIds = []
 
     for(const solution of solutions) {
       if(solution.language === 'cpp') {
@@ -30,6 +31,8 @@ async function solutionStatUpdate() {
       } else if(solution.language === 'sql') {
         solvedCountSQL++;
       }
+
+      maxQuesId = Math.max(maxQuesId, solution.quesId)
 
       if(solution.acceptedSolutions.length > 0) {
         acceptedQuesIds.push(solution.quesId)
@@ -45,6 +48,7 @@ async function solutionStatUpdate() {
       solvedCountJS,
       solvedCountSQL,
       partialSolvedCountCPP,
+      maxQuesId,
       acceptedQuesIds,
       unacceptedQuesIds
     })

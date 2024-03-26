@@ -8,12 +8,15 @@ import Error from "../components/Error"
 import ControlBar from "../components/ControlBar"
 
 function HomePage() {
+  const startTheme = JSON.parse(localStorage.getItem('theme_local'))
+
   const [isFound, setIsFound] = useState(false)
   const [solutionsObj, setSolutionsObj] = useState({})
   const [isError, setIsError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [loadSolutionCards, setLoadSolutionCards] = useState(true)
-  const [controlIndex, setControlIndex] = useState(-1)
+  const [controlIndex, setControlIndex] = useState(-1)  
+  const [theme, setTheme] = useState(startTheme ? startTheme : 'okaidia')
 
   useEffect(() => {
     if(!sessionStorage.getItem('visitedQuesIds')) {
@@ -21,7 +24,7 @@ function HomePage() {
     }
 
     const index = JSON.parse(sessionStorage.getItem('visitedQuesIds')).length - 1
-    console.log('home ' + index)
+    
     setControlIndex(index)
   }, [])
 
@@ -53,13 +56,15 @@ function HomePage() {
         setControlIndex={setControlIndex}
         setLoadSolutionCards={setLoadSolutionCards}
         setSolutionsObj={setSolutionsObj}
+        theme={theme}
+        setTheme={setTheme}
         />
         {
           loadSolutionCards
           ? (
             <SolutionCards 
             solutionsObj={solutionsObj} 
-            setIsFound={setIsFound} 
+            theme={theme}
             />)
           : (<></>)
         }

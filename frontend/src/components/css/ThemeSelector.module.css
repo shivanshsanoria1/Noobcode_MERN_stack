@@ -3,10 +3,9 @@
   justify-content: center;
   align-items: center;
   padding: 10px;
-  padding-bottom: 0;
 }
 
-label{
+.labelContainer label{
   color: white;
   font-size: 20px;
 }
@@ -15,15 +14,20 @@ label{
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
-  /* margin-bottom: 50px; */
+  padding: 5px;
 }
 
-select{
+.selectContainer select{
   background-color: #333333;
   color: white;
   border-style: none;
   border-radius: 5px;
   font-size: 16px;
-  padding: 5px 20px;
+  padding: 5px 14px;
+  padding-right: 7px;
+}
+
+.selectContainer select:hover{
+  opacity: 0.85;
+  cursor: pointer;
 }

@@ -1,6 +1,6 @@
 import classes from './css/ThemeSelector.module.css'
 
-function ThemeSelector({ startTheme, setTheme }) {
+function ThemeSelector({ theme, setTheme }) {
 
   const themes = [
     {name: 'a11yDark', displayName: 'A11y Dark'},
@@ -31,7 +31,7 @@ function ThemeSelector({ startTheme, setTheme }) {
       <select 
       id='selectTheme'
       name='selectTheme' 
-      defaultValue={startTheme} 
+      defaultValue={theme} 
       onChange={(e) => setTheme(e.target.value)}
       >
         {

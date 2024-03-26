@@ -7,6 +7,7 @@ exports.getSolutionStats = async(req, res) => {
       solvedCountJS, 
       solvedCountSQL, 
       partialSolvedCountCPP, 
+      maxQuesId,
       acceptedQuesIds, 
       unacceptedQuesIds 
     } = await SolutionStat.findOne({})
@@ -16,6 +17,7 @@ exports.getSolutionStats = async(req, res) => {
       solvedCountJS, 
       solvedCountSQL, 
       partialSolvedCountCPP, 
+      maxQuesId,
       acceptedQuesIds, 
       unacceptedQuesIds
     })
