@@ -51,7 +51,6 @@ function SolutionCards({ solutionsObj, theme }) {
           />
         })
       }
-      <hr />
     </> : (<></>) }
   </>)
 }

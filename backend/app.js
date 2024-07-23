@@ -13,10 +13,11 @@ const errorHandler  = require('./middleware/errorHandler')
 const syncAllSolutions = require('./util/syncAllSolutions')
 
 const PORT = process.env.PORT || 8000
+const MODE = process.env.NODE_ENV || 'development'
 
 const app = express()
 
-if(process.env.NODE_ENV !== 'production') {
+if(MODE !== 'production') {
   app.use(cors(corsOptions))
 }
 
@@ -27,7 +28,7 @@ app.use('/solutions', solutionRoutes)
 app.use('/solution-stats', solutionStatsRoutes)
 
 // Serve frontend in production mode
-if (process.env.NODE_ENV === 'production') {
+if (MODE === 'production') {
   app.use(express.static(path.join(__dirname, '../frontend/build')));
 
   app.get('*', (req, res) =>
@@ -38,7 +39,7 @@ if (process.env.NODE_ENV === 'production') {
 app.use(errorHandler)
 
 app.listen(PORT, () => {
-  console.log(`Server Started in ${process.env.NODE_ENV} mode at port ${PORT} at time: ${new Date().toISOString()}`)
+  console.log(`Server Started in ${MODE} mode at port ${PORT} at time: ${new Date().toISOString()}`)
 })
 
 dbConnection()

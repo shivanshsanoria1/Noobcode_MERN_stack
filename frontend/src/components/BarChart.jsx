@@ -35,7 +35,7 @@ function BarChart({ statDataObj }) {
         display: true,
         title: {
           display: true,
-          text: 'Leetcode question number (in increments of 100)',
+          text: 'Question Number (in increments of 100)',
           color: 'black',
           font: {
             size: 22,
@@ -61,10 +61,11 @@ function BarChart({ statDataObj }) {
         max: 100,
       }
     },
+
     plugins: {
       title: {
         display: true,
-        text: 'Distribution of Leetcode questions solved',
+        text: 'Distribution of Leetcode Questions solved',
         color: 'black',
         padding: {top: 0, left: 0, right: 0, bottom: 10},
         font: {
@@ -75,6 +76,7 @@ function BarChart({ statDataObj }) {
         display: false,
       }
     },
+
     elements: {
       bar: {
         borderWidth: 1,
@@ -83,10 +85,12 @@ function BarChart({ statDataObj }) {
           const index = context.dataIndex;
           const value = context.dataset.data[index];
   
-          if(value >= 80) 
+          if(value >= 70) 
             return '#aa00ff' // violet
-          else if(value >= 60)
+          else if(value >= 50)
             return '#0099ff' // blue
+          // else if(value >= 40)
+          //   return '#00e6ac' // sea-green
           else if(value >= 40)
             return '#00ff99' // green
           else if(value >= 30)
@@ -109,7 +113,8 @@ function BarChart({ statDataObj }) {
     margin: '20px 4%',
     border: '5px solid #444444',
     borderRadius: '5px', 
-    backgroundColor: "#f1f1f1"
+    backgroundColor: "#f1f1f1",
+    overflow: 'scroll'
   }
 
   return (<>

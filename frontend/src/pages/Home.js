@@ -44,7 +44,7 @@ function HomePage() {
       isFound === false ? (<>
         <div className={classes.msgBox}>
           <h2>
-            Welcome! Search for over <i>1000 solutions</i>  from 
+            Welcome! Search for over <i>1200 solutions</i>  from 
             <a href='https://leetcode.com/problemset/' target='_blank'>leetcode.com</a>
           </h2>
         </div>
@@ -70,7 +70,8 @@ function HomePage() {
         }
       </div>)
     }
-
+    
+    <hr />
   </>)
 }
 

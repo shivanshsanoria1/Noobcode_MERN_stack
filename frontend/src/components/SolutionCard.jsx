@@ -49,6 +49,16 @@ function SolutionCard({ solution, language, isAccepted, solutionNum }) {
     themeValue = themes.filter((theme) => theme.name === themeName)[0].value
   }
 
+  async function copyToClipboardHandler(){
+    // during deployment this will not work over http connection
+    // as it requires https connection or localhost
+    await navigator.clipboard.writeText(solution)
+
+    setIsCopied(true)
+
+    setTimeout(() => setIsCopied(false), 3000);
+  }
+
   return (
     <div className={isAccepted ? classes.acceptedSolutionContainer : classes.unacceptedSolutionContainer}>
       <div>
@@ -56,15 +66,7 @@ function SolutionCard({ solution, language, isAccepted, solutionNum }) {
         Method [{solutionNum}] ({isAccepted ? 'Accepted' : 'Not Accepted'})
           <button className={classes.copyBtn}
           disabled={isCopied}
-          onClick={async () => {
-            // during deployment this will not work over http connection
-            // as it requires https connection
-            await navigator.clipboard.writeText(solution)
-            setIsCopied(true)
-            setTimeout(() => {
-              setIsCopied(false)
-            }, 3000);
-          }}>
+          onClick={copyToClipboardHandler}>
             {
               isCopied
               ? <span>Copied...</span>

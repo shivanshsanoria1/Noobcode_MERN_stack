@@ -11,5 +11,11 @@
 
 .solutionsWrapper{
   padding: 10px 12%;
-  margin-bottom: 80px;
+  margin-bottom: 30px;
+}
+
+hr{
+  margin: 36px 24%;
+  margin-bottom: 100px;
+  border: 1px solid #dddddd;
 }
