@@ -1,0 +1,61 @@
+.controlBarContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px;
+}
+
+.navBtnsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+}
+
+.themeSelectorContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+.copyBtnContainer{
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  width: 20%;
+}
+
+.closeBtnContainer {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  width: 20%;
+}
+
+.controlBarContainer button {
+  width: 72px;
+  height: 40px;
+  color: white;
+  border-style: none;
+  border-radius: 5px;
+}
+
+.controlBarContainer button:hover {
+  opacity: 0.85;
+  cursor: pointer;
+  border: 2px solid #75a3a3;
+}
+
+.controlBarContainer button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.closeBtn {
+  background-color: #ff1a1a;
+}
+
+.copyBtn {
+  background-color: #00b359;
+}

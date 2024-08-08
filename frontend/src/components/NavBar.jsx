@@ -14,6 +14,13 @@ function NavBar() {
         
         <ul>
           <li>
+            <Link to="/algos">
+              <div className={classes.navlink}>
+                Algorithms
+              </div>
+            </Link>
+          </li>
+          <li>
             <Link to="/stats">
               <div className={classes.navlink}>
                 Statistics

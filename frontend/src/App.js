@@ -3,8 +3,9 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css'
 import NavBar from './components/NavBar';
 import HomePage from './pages/Home';
-import AboutPage from './pages/About';
+import Algorithms from'./pages/Algorithms';
 import Statistics from './pages/Statistics';
+import AboutPage from './pages/About';
 
 function App() {
   return (<>
@@ -12,6 +13,7 @@ function App() {
 
     <Routes>
       <Route path="/" element={ <HomePage /> } />
+      <Route path='algos' element={ <Algorithms /> } />
       <Route path='stats' element={ <Statistics /> } />
       <Route path='about' element={ <AboutPage /> } />
     </Routes>

@@ -9,23 +9,26 @@ const dbConnection = require('./config/dbConnection')
 const corsOptions = require('./config/corsOptions')
 const solutionRoutes = require('./routes/solution')
 const solutionStatsRoutes = require('./routes/solutionStats')
+const algoRoutes = require('./routes/algorithm')
 const errorHandler  = require('./middleware/errorHandler')
 const syncAllSolutions = require('./util/syncAllSolutions')
+const syncAlgos = require('./util/syncAlgorithms')
 
 const PORT = process.env.PORT || 8000
 const MODE = process.env.NODE_ENV || 'development'
 
 const app = express()
 
-if(MODE !== 'production') {
-  app.use(cors(corsOptions))
-}
+// if(MODE !== 'production') {
+//   app.use(cors(corsOptions))
+// }
 
 app.use(express.json())
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/solutions', solutionRoutes)
 app.use('/solution-stats', solutionStatsRoutes)
+app.use('/algos', algoRoutes)
 
 // Serve frontend in production mode
 if (MODE === 'production') {
@@ -50,4 +53,5 @@ mongoose.connection.once('open', () => {
 
 if(process.env.SYNC_FILES === 'true'){
   syncAllSolutions()
+  syncAlgos()
 }
