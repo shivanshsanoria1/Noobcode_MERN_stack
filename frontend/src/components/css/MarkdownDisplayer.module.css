@@ -1,0 +1,58 @@
+.markdownContainer{
+  border: 1px solid black;
+  padding: 10px 20px;
+  background-color: rgb(85, 86, 86);
+  color: whitesmoke
+}
+
+.markdownContainer h1, h2, h3, h4, h5, h6{
+  text-align: center;
+}
+
+.markdownContainer ul{
+  border: 0;
+  padding: 5px 20px;
+  list-style-type: disc;
+}
+
+.markdownContainer ol{
+  border: 0;
+  padding: 5px 20px;
+  list-style-type: decimal;
+}
+
+.markdownContainer li{
+  background: none;
+  padding: 5px 5px;
+
+  &:hover{
+    border: none;
+  }
+}
+
+.markdownContainer hr{
+  border: 2px solid;
+}
+
+.markdownContainer table{
+  border: 1px solid whitesmoke;
+}
+
+.markdownContainer th{
+  padding: 4px 8px;
+  border-bottom: 1px solid whitesmoke;
+  border-right: 1px solid whitesmoke;
+
+  &:last-child{
+    border-right: none;
+  }
+}
+
+.markdownContainer td{
+  padding: 4px 8px;
+  border-right: 1px solid whitesmoke;
+
+  &:last-child{
+    border-right: none;
+  }
+}

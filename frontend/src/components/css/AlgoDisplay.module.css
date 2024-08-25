@@ -1,0 +1,107 @@
+.algoContainer{
+  border: 2px solid black;
+  height: 88vh;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.descriptionContainer{
+  padding: 0;
+  background-color: orange;
+  height: 100%;
+  width: 50%;
+  resize: horizontal;
+  min-width: 20%;
+  overflow: auto;
+}
+
+.titleContainer{
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 10px 5px;
+  background-color: #6b00b3;
+  color: white;
+}
+
+.codeAndControlContainer{
+  background-color: grey;
+  height: 100%;
+  overflow: auto;
+  min-width: 20%;
+  flex-grow: 1;
+}
+
+.codeContainer{
+  margin-top: 0;
+}
+
+.controlBarContainer{
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  padding: 5px 30px;
+  padding-bottom: 0;
+  height: 34px;
+}
+
+.languageContainer{
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  width: 20%;
+  padding: 8px 0;
+  padding-right: 5px;
+  border-radius: 5px;
+  font-size: 18px;
+  color: #dddddd;
+  background-color: royalblue;
+  opacity: 0.8;
+}
+
+.copyBtnContainer{
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  width: 20%;
+}
+
+.closeBtnContainer {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  width: 20%;
+}
+
+.controlBarContainer button {
+  width: 72px;
+  height: 36px;
+  color: white;
+  font-size: 17px;
+  border-style: none;
+  border-radius: 5px;
+}
+.controlBarContainer button:hover {
+  opacity: 0.85;
+  cursor: pointer;
+  border: 2px solid #75a3a3;
+}
+.controlBarContainer button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.closeBtn {
+  background-color: #ff1a1a;
+}
+
+.copyBtn {
+  background-color: #00b359;
+}
+
+.logo {
+  width: 50%;
+  height: 50%;
+  color: white
+}

@@ -1,0 +1,115 @@
+.filterAndSortContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.filterContainer{
+  padding: 5px 20px;
+}
+
+.filterContainer label{
+  padding: 5px 10px;
+  font-size: 17px;
+}
+
+.filterContainer input{
+  height: 24px;
+  width: 300px;
+  min-width: 100px;
+  border-radius: 5px;
+  background-color: #333333;
+  color: #dddddd;
+  font-size: 15px;
+}
+
+.sortContainer{
+  padding: 5px 20px;
+}
+
+.sortContainer label{
+  padding: 5px 10px;
+  font-size: 17px;
+}
+
+.sortContainer select{
+  padding: 4px 6px;
+  padding-left: 10px;
+  border-radius: 5px;
+  background-color: #333333;
+  color: #dddddd;
+  font-size: 15px;
+}
+
+.algoTableConatinerWrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 0;
+}
+
+.algoTableConatiner{
+  width: 70%;
+  color: #dddddd;
+}
+
+.algoTableConatiner table{
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.algoTableConatiner thead{
+  width: 100%;
+  display: table-header-group;
+  height: 40px;
+  font-size: 18px;
+}
+.algoTableConatiner thead:hover{
+  pointer-events: none;
+}
+
+.algoTableConatiner th{
+  padding: 0 10px;
+  text-align: left;
+  background-color: #666666;
+}
+.algoTableConatiner th:first-child{
+  width: 10%;
+  text-align: center;
+}
+.algoTableConatiner th:last-child{
+  width: 20%;
+}
+
+.algoTableConatiner tbody{
+  width: 100%;
+  display: table;
+  font-size: 20px;
+}
+
+.algoTableConatiner tr{
+  width: 100%;
+  background-color: #888888;
+}
+.algoTableConatiner tr:nth-child(even){
+  background-color: #999999;
+}
+.algoTableConatiner tr:hover{
+  background-color: rgb(54, 193, 147);
+  cursor: pointer;
+  outline: thin solid green;
+}
+
+.algoTableConatiner td{
+  padding: 0 10px;
+  padding-top: 10px;
+}
+.algoTableConatiner td:first-child{
+  width: 10%;
+  text-align: center;
+}
+.algoTableConatiner td:last-child{
+  width: 20%;
+}
