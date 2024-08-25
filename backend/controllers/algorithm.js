@@ -10,7 +10,8 @@ exports.getAllAlgorithms =  async (req, res) => {
       id: algo._id,
       title: algo.title,
       language: algo.language,
-      code: algo.code
+      // random number in range [1, 5]
+      difficulty: Math.floor(Math.random()*(5-0) + 1)
     }))
 
     res.status(200).json(allAlgos)
@@ -38,6 +39,13 @@ exports.getAlgorithm = async (req, res) => {
     }
 
     const algo = await Algorithm.findById(algo_id)
+
+    if(!algo){
+      return res.status(404).json({
+        found: false,
+        msg: 'Algorithm not found :('
+      })
+    }
 
     res.status(200).json({
       id: algo._id.toString(),
