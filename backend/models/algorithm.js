@@ -12,6 +12,14 @@ const algoSchema = new Schema({
     lowercase: true,
     required: true
   },
+  difficulty: {
+    type: Number,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
   code: {
     type: String,
     required: true

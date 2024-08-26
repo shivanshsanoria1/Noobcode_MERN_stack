@@ -11,13 +11,18 @@ import MarkdownDisplayer from './MarkdownDisplayer';
 
 import classes from './css/AlgoDisplay.module.css'
 
-function AlgoDisplay({setShowList, codeObj, setCodeObj}) {
+function AlgoDisplay({setShowList, codeObj, setIsLoading }) {
   SyntaxHighlighter.registerLanguage('cpp', cpp)
 
   const [isCopied, setIsCopied] = useState(false)
 
   async function copyToClipboardHandler(){
     console.log('copy btn clicked')
+
+    if(!navigator || !navigator.clipboard){
+      console.error('Navigator or Clipboard not found')
+      return
+    }
 
     // during deployment this will not work over http connection
     // as it requires https connection or localhost
@@ -29,27 +34,33 @@ function AlgoDisplay({setShowList, codeObj, setCodeObj}) {
   }
 
   function closeClickHandler(){
-    console.log('close btn clicked')
-    setCodeObj({})
+    //setCodeObj({})
     setShowList(true)
   }
 
-  console.log(codeObj)
-  const {title, language, code} = codeObj
+  const {title, language, description, code} = codeObj
 
   let languageToDisplay = language
   if(language === 'cpp'){
     languageToDisplay = 'C++'
   }
 
+  function changeClickHandler(){
+    console.log('meeeeeeeeeeeee')
+    setIsLoading(true)
+    setTimeout(() => setIsLoading(false), 100);
+  }
+
   return (<>
+    <button onClick={changeClickHandler}>change me</button>
+
     <div className={classes.algoContainer}>
       <div className={classes.descriptionContainer}>
         <div className={classes.titleContainer}>
           {title}
         </div>
 
-        <MarkdownDisplayer />
+        <MarkdownDisplayer textMd={description} />
       </div>
 
       <div className={classes.codeAndControlContainer}>

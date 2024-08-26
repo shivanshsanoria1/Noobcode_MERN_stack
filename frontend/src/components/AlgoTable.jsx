@@ -33,7 +33,7 @@ function AlgoTable({ algoObjs, setShowList, setIsError, setCodeObj }) {
 
   function numberToColor(val){
     if(val === 1) 
-      return '#00994d' // light-green
+      return '#00cc7a' // light-green
     else if(val === 2)
       return '#006600' // dark-green
     else if(val === 3)
@@ -56,6 +56,7 @@ function AlgoTable({ algoObjs, setShowList, setIsError, setCodeObj }) {
         id: data.id,
         title: data.title,
         language: data.language,
+        description: data.description,
         code: data.code
       }))
 

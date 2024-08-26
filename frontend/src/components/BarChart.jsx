@@ -85,17 +85,15 @@ function BarChart({ statDataObj }) {
           const index = context.dataIndex;
           const value = context.dataset.data[index];
   
-          if(value >= 70) 
+          if(value >= 80) 
             return '#aa00ff' // violet
-          else if(value >= 50)
+          else if(value >= 60)
             return '#0099ff' // blue
-          // else if(value >= 40)
-          //   return '#00e6ac' // sea-green
+          else if(value >= 50)
+            return '#00ff99' // green; ('#00e6ac': sea-green)
           else if(value >= 40)
-            return '#00ff99' // green
-          else if(value >= 30)
             return '#ffff4d' // yellow
-          else if(value >= 20)
+          else if(value >= 30)
             return '#ff9933' // orange
           return '#ff4d4d' // red
         }

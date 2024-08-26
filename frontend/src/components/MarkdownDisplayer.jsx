@@ -49,7 +49,7 @@ Please make sure to update tests as appropriate.
     <Markdown 
     remarkPlugins={[[remarkGfm, {singleTilde: false}]]}
     >
-      {markdown}
+      {textMd}
     </Markdown>
   </div>)
 }
