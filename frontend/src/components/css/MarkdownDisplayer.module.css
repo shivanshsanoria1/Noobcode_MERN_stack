@@ -1,37 +1,49 @@
 .markdownContainer{
   border: 1px solid black;
-  padding: 10px 20px;
+  padding: 10px 30px;
   background-color: rgb(85, 86, 86);
-  color: whitesmoke
+  color: whitesmoke;
+  min-height: 100%;
 }
 
 .markdownContainer h1, h2, h3, h4, h5, h6{
-  text-align: center;
+  text-align: left;
+  margin: 10px 0;
+  margin-bottom: 15px;
+  color: rgb(202, 165, 235);
+}
+
+.markdownContainer p{
+  margin: 0;
+  font-size: 17px;
 }
 
 .markdownContainer ul{
   border: 0;
   padding: 5px 20px;
+  margin: 0;
   list-style-type: disc;
 }
 
 .markdownContainer ol{
   border: 0;
   padding: 5px 20px;
+  margin: 0;
   list-style-type: decimal;
 }
 
 .markdownContainer li{
   background: none;
   padding: 5px 5px;
-
-  &:hover{
-    border: none;
-  }
+}
+.markdownContainer li:hover{
+  border: none;
 }
 
 .markdownContainer hr{
   border: 2px solid;
+  width: 80%;
+  margin: 20px 0;
 }
 
 .markdownContainer table{
@@ -42,17 +54,20 @@
   padding: 4px 8px;
   border-bottom: 1px solid whitesmoke;
   border-right: 1px solid whitesmoke;
-
-  &:last-child{
-    border-right: none;
-  }
+}
+.markdownContainer th:last-child{
+  border-right: none;
 }
 
 .markdownContainer td{
   padding: 4px 8px;
   border-right: 1px solid whitesmoke;
+  border-bottom: 1px solid whitesmoke;
+}
+.markdownContainer td:last-child{
+  border-right: none;
+}
 
-  &:last-child{
-    border-right: none;
-  }
+.markdownContainer tr:last-child td{
+  border-bottom: none;
 }

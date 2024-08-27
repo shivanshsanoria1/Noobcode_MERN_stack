@@ -9,12 +9,34 @@
   border-radius: 5px;
 }
 
+.msgBox h2{
+  color: #dddddd;
+  text-align: center;
+}
+
+.msgBox a{
+  text-decoration: none;
+  padding-left: 10px;
+}
+.msgBox a:link{
+  color: plum;
+}
+.msgBox a:visited{
+  color: plum;
+}
+.msgBox a:active{
+  color: tomato;
+}
+.msgBox a:hover{
+  color: pink;
+}
+
 .solutionsWrapper{
   padding: 10px 12%;
   margin-bottom: 30px;
 }
 
-hr{
+.homeContainer hr{
   margin: 36px 24%;
   margin-bottom: 100px;
   border: 1px solid #dddddd;

@@ -28,7 +28,7 @@ function HomePage() {
     setControlIndex(index)
   }, [])
 
-  return (<>
+  return (<div className={classes.homeContainer}>
     <SearchBar 
     setIsFound={setIsFound} 
     setSolutionsObj={setSolutionsObj} 
@@ -72,7 +72,7 @@ function HomePage() {
     }
     
     <hr />
-  </>)
+  </div>)
 }
 
 export default HomePage
