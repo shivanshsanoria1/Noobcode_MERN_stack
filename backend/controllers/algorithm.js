@@ -10,8 +10,6 @@ exports.getAllAlgorithms =  async (req, res) => {
       id: algo._id,
       title: algo.title,
       language: algo.language,
-      // random number in range [1, 5]
-      //difficulty: Math.floor(Math.random()*(5-0) + 1)
       difficulty: algo.difficulty
     }))
 
@@ -53,7 +51,8 @@ exports.getAlgorithm = async (req, res) => {
       title: algo.title,
       language: algo.language,
       description: algo.description,
-      code: algo.code
+      code: algo.code,
+      linkedAlgos: algo.linkedAlgos
     })
 
   }catch(err){

@@ -1,6 +1,11 @@
 const { Schema, model } = require('mongoose')
 
 const algoSchema = new Schema({
+  customId: {
+    type: String,
+    length: 13,
+    required: true
+  },
   title: {
     type: String,
     maxLength: 100,
@@ -23,6 +28,32 @@ const algoSchema = new Schema({
   code: {
     type: String,
     required: true
+  }, 
+  linkedAlgos: {
+    prerequisiteAlgo: {
+      id: {
+        type: Schema.Types.ObjectId
+      },
+      title: {
+        type: String
+      }
+    },
+    similarAlgo: {
+      id: {
+        type: Schema.Types.ObjectId
+      },
+      title: {
+        type: String
+      }
+    },
+    followupAlgo: {
+      id: {
+        type: Schema.Types.ObjectId
+      },
+      title: {
+        type: String
+      }
+    }
   }
 }, {
   timestamps: true
