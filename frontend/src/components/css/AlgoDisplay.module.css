@@ -26,7 +26,7 @@
 }
 
 .codeAndControlContainer{
-  background-color: grey;
+  background-color: rgb(85, 86, 86);
   height: 100%;
   min-width: 20%;
   flex-grow: 1;
@@ -114,4 +114,54 @@
   width: 50%;
   height: 50%;
   color: white
+}
+
+.linkedAlgoContainer{
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  background-color: #333333;
+  color: #dddddd;
+  font-size: 17px;
+  padding: 10px 20px;
+}
+
+.linkedAlgoTitle{
+  margin: 0;
+}
+
+.linkedAlgoLink{
+  margin: 0;
+  padding-left: 20px;
+  color: lightpink;
+}
+.linkedAlgoLink:hover{
+  cursor: pointer;
+  color: lightgreen;
+}
+
+/* media queries */
+
+@media (width < 768px) {
+  .algoContainer{
+    flex-direction: column;
+  }
+
+  .descriptionContainer{
+    width: 100%;
+    height: auto;
+    min-height: 60vh;
+  }
+  .codeAndControlContainer{
+    min-width: 100%;
+    height: auto;
+    min-height: 70vh;
+    overflow: scroll;
+  }
+
+  .controlBarContainer{
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+  }
 }

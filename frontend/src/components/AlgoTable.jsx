@@ -57,7 +57,8 @@ function AlgoTable({ algoObjs, setShowList, setIsError, setCodeObj }) {
         title: data.title,
         language: data.language,
         description: data.description,
-        code: data.code
+        code: data.code,
+        linkedAlgos: data.linkedAlgos
       }))
 
       setIsError(false)

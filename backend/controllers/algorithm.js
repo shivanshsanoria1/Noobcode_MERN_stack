@@ -46,13 +46,20 @@ exports.getAlgorithm = async (req, res) => {
       })
     }
 
+    const {title, language, description, code, linkedAlgos} = algo
+    const {prerequisiteAlgo, similarAlgo, followupAlgo} = linkedAlgos
+
     res.status(200).json({
       id: algo._id.toString(),
-      title: algo.title,
-      language: algo.language,
-      description: algo.description,
-      code: algo.code,
-      linkedAlgos: algo.linkedAlgos
+      title,
+      language,
+      description,
+      code,
+      linkedAlgos: {
+        prerequisiteAlgo,
+        similarAlgo,
+        followupAlgo
+      }
     })
 
   }catch(err){

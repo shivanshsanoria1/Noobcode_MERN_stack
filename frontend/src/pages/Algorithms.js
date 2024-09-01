@@ -56,14 +56,14 @@ function Algorithms() {
       setShowList={setShowList}
       setIsError={setIsError}
       setCodeObj={setCodeObj}
-    /> : <>
+      /> :
       <AlgoDisplay 
         setShowList={setShowList} 
         setIsLoading={setIsLoading}
         codeObj={codeObj} 
         setCodeObj={setCodeObj} 
       />
-    </>)}
+    )}
 
   </>)
 }

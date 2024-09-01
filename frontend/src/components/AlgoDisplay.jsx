@@ -8,10 +8,11 @@ from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 import closeBtnLogo from '../logos/close_btn_logo.svg'
 import MarkdownDisplayer from './MarkdownDisplayer';
+import baseUrl from '../config/baseUrl';
 
 import classes from './css/AlgoDisplay.module.css'
 
-function AlgoDisplay({setShowList, codeObj, setIsLoading }) {
+function AlgoDisplay({setShowList, setIsLoading, codeObj, setCodeObj }) {
   function convertThemeNameToValue(themeName){
     const themeNameToValues = [
       {name: 'a11yDark', value: a11yDark},
@@ -44,7 +45,11 @@ function AlgoDisplay({setShowList, codeObj, setIsLoading }) {
   const [isCopied, setIsCopied] = useState(false)
   const [themeValue, setThemeValue] = useState(convertThemeNameToValue(themeName_local))
 
-  const {title, language, description, code} = codeObj
+  const {title, language, description, code, linkedAlgos} = codeObj
+
+  const [prerequisiteAlgo, setPrerequisiteAlgo] = useState(linkedAlgos.prerequisiteAlgo)
+  const [similarAlgo, setSimilarAlgo] = useState(linkedAlgos.similarAlgo)
+  const [followupAlgo, setFollowupAlgo] = useState(linkedAlgos.followupAlgo)
 
   let languageToDisplay = language
   if(language === 'cpp'){
@@ -82,6 +87,27 @@ function AlgoDisplay({setShowList, codeObj, setIsLoading }) {
     setTimeout(() => setIsLoading(false), 200);
   }
 
+  async function linkedAlgoClickHandler(e){
+    const id = e.target.id
+
+    const response = await fetch(`${baseUrl}/algos?algo_id=${id}`)
+    const data = await response.json()
+
+    setIsLoading(true)
+
+    setCodeObj((codeObj) => ({
+      ...codeObj,
+      id: data.id,
+      title: data.title,
+      language: data.language,
+      description: data.description,
+      code: data.code,
+      linkedAlgos: data.linkedAlgos
+    }))
+
+    setTimeout(() => setIsLoading(false), 1000)
+  }
+
   const themeNameToDisplayNames = [
     {name: 'a11yDark', displayName: 'A11y Dark'},
     {name: 'atomDark', displayName: 'Atom Dark'}, 
@@ -110,6 +136,47 @@ function AlgoDisplay({setShowList, codeObj, setIsLoading }) {
         </div>
 
         <MarkdownDisplayer textMd={description} />
+
+        {
+          Object.keys(prerequisiteAlgo).length > 0 && 
+          <div className={classes.linkedAlgoContainer}>
+            <p className={classes.linkedAlgoTitle}> Prerequisite: </p>
+            <p 
+            id={prerequisiteAlgo.id} 
+            className={classes.linkedAlgoLink}
+            onClick={linkedAlgoClickHandler}
+            >
+              {prerequisiteAlgo.title}
+            </p>
+          </div>
+        }
+        {
+          Object.keys(similarAlgo).length > 0 && 
+          <div className={classes.linkedAlgoContainer}>
+            <p className={classes.linkedAlgoTitle}> Similar: </p>
+            <p 
+            id={similarAlgo.id} 
+            className={classes.linkedAlgoLink}
+            onClick={linkedAlgoClickHandler}
+            >
+              {similarAlgo.title}
+            </p>
+          </div>
+        }
+        {
+          Object.keys(followupAlgo).length > 0 && 
+          <div className={classes.linkedAlgoContainer}>
+            <p className={classes.linkedAlgoTitle}> Follow-Up: </p>
+            <p 
+            id={followupAlgo.id} 
+            className={classes.linkedAlgoLink}
+            onClick={linkedAlgoClickHandler}
+            >
+              {followupAlgo.title}
+            </p>
+          </div>
+        }
+        
       </div>
 
       <div className={classes.codeAndControlContainer}>
