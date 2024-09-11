@@ -11,7 +11,7 @@ function Algorithms() {
   const [isError, setIsError] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [algoObjs, setAlgoObjs] = useState([])
-  const [codeObj, setCodeObj] = useState({})
+  const [algoObj, setAlgoObj] = useState({})
 
   async function fetchAlgorithms() {
 		try{
@@ -55,13 +55,14 @@ function Algorithms() {
       algoObjs={algoObjs} 
       setShowList={setShowList}
       setIsError={setIsError}
-      setCodeObj={setCodeObj}
+      setAlgoObj={setAlgoObj}
       /> :
       <AlgoDisplay 
         setShowList={setShowList} 
         setIsLoading={setIsLoading}
-        codeObj={codeObj} 
-        setCodeObj={setCodeObj} 
+        setIsError={setIsError}
+        algoObj={algoObj} 
+        setAlgoObj={setAlgoObj} 
       />
     )}
 

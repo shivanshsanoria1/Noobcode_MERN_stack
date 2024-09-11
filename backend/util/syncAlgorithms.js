@@ -25,10 +25,27 @@ function readFromCSV() {
         const customId = data[i][0]
         const fileNameWithoutExt = data[i][1].replaceAll(/;/g, ',')
         const difficulty = parseInt(data[i][2])
+        const prerequisiteId = data[i][3]
+        const similarId = data[i][4]
+        const followupId = data[i][5]
         
-        algoMap.set(fileNameWithoutExt, {
-          customId,
-          difficulty
+        algoMap.set(customId, {
+          title: fileNameWithoutExt.split('_').join(' '),
+          difficulty,
+          linkedAlgos: {
+            prerequisiteAlgo: {
+              id: prerequisiteId,
+              title: ''
+            },
+            similarAlgo: {
+              id: similarId,
+              title: ''
+            },
+            followupAlgo: {
+              id: followupId,
+              title: ''
+            },
+          }
         })
       }
 
@@ -56,21 +73,19 @@ function readCodeFiles(algoMap){
         }
 
         const algoFilePath = path.join(algosDirPath, fileName)
-        
-        const fileNameWithoutExt = fileName.split('.')[0]
 
-        const title = fileName.split('.')[0].split('_').join(' ')
+        const customId = fileName.substring(fileName.indexOf('[') + 1, fileName.indexOf(']'))
         const language = path.extname(algoFilePath).substring(1)
+
         const fileData = await readFile(algoFilePath, { encoding: 'utf8' })
 
-        if(!algoMap.has(fileNameWithoutExt)){
+        if(!algoMap.has(customId)){
           throw new Error(`File << ${fileName} >> not found in .csv file`)
         }
         
-        const algoObj = algoMap.get(fileNameWithoutExt)
-        algoMap.set(fileNameWithoutExt, {
+        const algoObj = algoMap.get(customId)
+        algoMap.set(customId, {
           ...algoObj,
-          title,
           language,
           code: fileData
         })
@@ -79,7 +94,7 @@ function readCodeFiles(algoMap){
       resolve()
 
     }catch(err){
-      console.log('ERROR: readFiles() in Algos.')
+      console.log('ERROR: readCodeFiles() in Algos.')
       console.log(err)
       reject()
     }
@@ -96,18 +111,18 @@ function readMarkdownFiles(algoMap) {
       for(const fileName of fileNames){
         const markdownFilePath = path.join(markdownDirPath, fileName)
         
-        const fileNameWithoutExt = fileName.split('.')[0]
+        const customId = fileName.substring(fileName.indexOf('[') + 1, fileName.indexOf(']'))
 
         const fileData = await readFile(markdownFilePath, { encoding: 'utf8' })
 
-        if(!algoMap.has(fileNameWithoutExt)){
+        if(!algoMap.has(customId)){
           throw new Error(`File << ${fileName} >> not found in .csv file`)
         }
         
-        const algoObj = algoMap.get(fileNameWithoutExt)
-        algoMap.set(fileNameWithoutExt, {
+        const algoObj = algoMap.get(customId)
+        algoMap.set(customId, {
           ...algoObj,
-          description: fileData
+          description: fileData === '' ? '## Description not available.' : fileData
         })
       }
 
@@ -123,129 +138,42 @@ function readMarkdownFiles(algoMap) {
 
 function convertMapToArray(mp){
   const arr = []
-  for(const obj of mp.values()){
-    arr.push(obj)
+  for(const [customId, obj] of mp){
+    arr.push({
+      customId,
+      ...obj
+    })
   }
 
   return arr
 }
 
-function readFromDB(){
-  return new Promise(async (resolve, reject) => {
-    try{
-      const algos = await Algorithm.find({})
-      
-      const customId_to_DBId_map = new Map()
-
-      for(let algo of algos){
-        const {customId, _id, title} = algo
-        customId_to_DBId_map.set(customId, {
-          _id: _id.toString(),
-          title
-        })
-      }
-
-      resolve(customId_to_DBId_map)
-
-    }catch(err){
-      console.log('ERROR: readFromDB() in algos.')
-      console.log(err)
-      reject()
-    }
-  })
-}
-
-function readFromCSVAfterDB() {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const csvFilePath = path.join(__dirname, '..', '..', 'LeetcodeSolutions', 'helper', 'metadata', 'algorithms_metadata.csv')
-      const csv_data = await readFile(csvFilePath, { encoding: 'utf8' });
-
-      const data = csv_data.split('\n').map((row) => 
-        row
-        .replaceAll(/,_/g, ';_')
-        .replaceAll(/"/g, '')
-        .replace('\r', '')
-        .split(',')
-      )
-      // remove the last empty row
-      data.pop()
-
-      const customId_to_linkedCustomIds_map = new Map()
-
-      for(let i=1; i<data.length; i++){
-        const customId = data[i][0]
-        const prerequisiteId = data[i][3]
-        const similarId = data[i][4]
-        const followupId = data[i][5]
-
-        customId_to_linkedCustomIds_map.set(customId, {
-          prerequisiteId,
-          similarId,
-          followupId
-        })
-      }
-
-      resolve(customId_to_linkedCustomIds_map)
-        
-    } catch(err) {
-      console.log('ERROR: readFromCSVAfterDB() in Algos.')
-      console.log(err);
-      reject()
-    }
-  })
-}
-
-function convertCustomIdsToDBIds(customId_to_linkedCustomIds_map, customId_to_DBId_map){
-  const DBId_to_linkedDBIds_map = new Map()
-
-  for(const [customId, linkedIds] of customId_to_linkedCustomIds_map){
-    const {prerequisiteId, similarId, followupId} = linkedIds
-
-    const customDBId = customId_to_DBId_map.get(customId)._id
-
-    const prerequisiteAlgo = prerequisiteId.length > 0 ? customId_to_DBId_map.get(prerequisiteId) : {_id: '', title: ''}
-    const similarAlgo = similarId.length > 0 ? customId_to_DBId_map.get(similarId) : {_id: '', title: ''}
-    const followupAlgo = followupId.length > 0 ? customId_to_DBId_map.get(followupId) : {_id: '', title: ''}
-
-    DBId_to_linkedDBIds_map.set(customDBId, {
-      prerequisiteAlgo,
-      similarAlgo,
-      followupAlgo
-    })
-  }
-
-  return DBId_to_linkedDBIds_map
-}
-
-function writeLinkedIdsToDB(DBId_to_linkedDBIds_map){
+function linkedAlgos_stat_update(){
   return new Promise(async(resolve, reject) => {
     try{
-      for(const [customDBId, linkedDBIds] of DBId_to_linkedDBIds_map){
-        const {prerequisiteAlgo, similarAlgo, followupAlgo} = linkedDBIds
-        
-        const algoObj = await Algorithm.findById({_id: customDBId})
+      const algos = await Algorithm.find()
 
-        if(prerequisiteAlgo._id.length > 0){
-          algoObj.linkedAlgos.prerequisiteAlgo.id = prerequisiteAlgo._id 
-          algoObj.linkedAlgos.prerequisiteAlgo.title = prerequisiteAlgo.title
-        }
-        if(similarAlgo._id.length > 0){
-          algoObj.linkedAlgos.similarAlgo.id = similarAlgo._id 
-          algoObj.linkedAlgos.similarAlgo.title = similarAlgo.title
-        }
-        if(followupAlgo._id.length > 0){
-          algoObj.linkedAlgos.followupAlgo.id = followupAlgo._id 
-          algoObj.linkedAlgos.followupAlgo.title = followupAlgo.title
-        }
+      for(const algo of algos){
+        for(const key in algo.linkedAlgos){
+          if(algo.linkedAlgos.hasOwnProperty(key)){
+            const linkedCustomId = algo.linkedAlgos[key].id
 
-        await algoObj.save()
+            if(linkedCustomId === ''){
+              continue
+            }
+
+            const linkedAlgoObj = await Algorithm.findOne({customId: linkedCustomId})
+
+            algo.linkedAlgos[key].id = linkedAlgoObj._id.toString()
+            algo.linkedAlgos[key].title = linkedAlgoObj.title
+            await algo.save()
+          }
+        }
       }
 
       resolve()
-
     }catch(err){
-      console.log('ERROR: writeLinkedIdsToDB() in algos.')
+      console.log('ERROR: linkedAlgos_stat_update() in syncAlgos()')
       console.log(err)
       reject()
     }
@@ -261,14 +189,11 @@ async function syncAlgos(){
     await readCodeFiles(algoMap)
     await readMarkdownFiles(algoMap)
     const algosArray = convertMapToArray(algoMap)
-    
+
     await Algorithm.deleteMany({})
     await Algorithm.insertMany(algosArray, {ordered: false})
 
-    const customId_to_DBId_map = await readFromDB()
-    const customId_to_linkedCustomIds_map = await readFromCSVAfterDB()
-    const DBId_to_linkedDBIds_map = convertCustomIdsToDBIds(customId_to_linkedCustomIds_map, customId_to_DBId_map)
-    await writeLinkedIdsToDB(DBId_to_linkedDBIds_map)
+    await linkedAlgos_stat_update()
 
     console.log(`Algo. File Sync Completed at: ${new Date().toISOString()}`)
     const endTime = Date.now()

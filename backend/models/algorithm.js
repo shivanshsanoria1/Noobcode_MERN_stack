@@ -32,7 +32,7 @@ const algoSchema = new Schema({
   linkedAlgos: {
     prerequisiteAlgo: {
       id: {
-        type: Schema.Types.ObjectId
+        type: String
       },
       title: {
         type: String
@@ -40,7 +40,7 @@ const algoSchema = new Schema({
     },
     similarAlgo: {
       id: {
-        type: Schema.Types.ObjectId
+        type: String
       },
       title: {
         type: String
@@ -48,7 +48,7 @@ const algoSchema = new Schema({
     },
     followupAlgo: {
       id: {
-        type: Schema.Types.ObjectId
+        type: String
       },
       title: {
         type: String

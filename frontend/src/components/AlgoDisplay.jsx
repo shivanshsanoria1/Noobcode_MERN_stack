@@ -12,7 +12,7 @@ import baseUrl from '../config/baseUrl';
 
 import classes from './css/AlgoDisplay.module.css'
 
-function AlgoDisplay({setShowList, setIsLoading, codeObj, setCodeObj }) {
+function AlgoDisplay({setShowList, setIsLoading, setIsError, algoObj, setAlgoObj }) {
   function convertThemeNameToValue(themeName){
     const themeNameToValues = [
       {name: 'a11yDark', value: a11yDark},
@@ -45,7 +45,7 @@ function AlgoDisplay({setShowList, setIsLoading, codeObj, setCodeObj }) {
   const [isCopied, setIsCopied] = useState(false)
   const [themeValue, setThemeValue] = useState(convertThemeNameToValue(themeName_local))
 
-  const {title, language, description, code, linkedAlgos} = codeObj
+  const {title, language, description, code, linkedAlgos} = algoObj
 
   const [prerequisiteAlgo, setPrerequisiteAlgo] = useState(linkedAlgos.prerequisiteAlgo)
   const [similarAlgo, setSimilarAlgo] = useState(linkedAlgos.similarAlgo)
@@ -66,7 +66,7 @@ function AlgoDisplay({setShowList, setIsLoading, codeObj, setCodeObj }) {
 
     // during deployment this will not work over http connection
     // as it requires https connection or localhost
-    await navigator.clipboard.writeText(codeObj.code)
+    await navigator.clipboard.writeText(algoObj.code)
 
     setIsCopied(true)
 
@@ -88,24 +88,31 @@ function AlgoDisplay({setShowList, setIsLoading, codeObj, setCodeObj }) {
   }
 
   async function linkedAlgoClickHandler(e){
-    const id = e.target.id
+    try{
+      const id = e.target.id
 
-    const response = await fetch(`${baseUrl}/algos?algo_id=${id}`)
-    const data = await response.json()
+      const response = await fetch(`${baseUrl}/algos?algo_id=${id}`)
+      const data = await response.json()
 
-    setIsLoading(true)
+      setIsLoading(true)
 
-    setCodeObj((codeObj) => ({
-      ...codeObj,
-      id: data.id,
-      title: data.title,
-      language: data.language,
-      description: data.description,
-      code: data.code,
-      linkedAlgos: data.linkedAlgos
-    }))
+      setAlgoObj((prev) => ({
+        ...prev,
+        id: data.id,
+        title: data.title,
+        language: data.language,
+        description: data.description,
+        code: data.code,
+        linkedAlgos: data.linkedAlgos
+      }))
 
-    setTimeout(() => setIsLoading(false), 1000)
+      setTimeout(() => setIsLoading(false), 500)
+
+    }catch(err){
+      console.error(err)
+      setIsError(true)
+      setTimeout(() => setIsError(false), 3000);
+    }
   }
 
   const themeNameToDisplayNames = [
@@ -138,7 +145,7 @@ function AlgoDisplay({setShowList, setIsLoading, codeObj, setCodeObj }) {
         <MarkdownDisplayer textMd={description} />
 
         {
-          Object.keys(prerequisiteAlgo).length > 0 && 
+          Object.keys(prerequisiteAlgo).length > 0 && prerequisiteAlgo.id.length > 0 && 
           <div className={classes.linkedAlgoContainer}>
             <p className={classes.linkedAlgoTitle}> Prerequisite: </p>
             <p 
@@ -151,7 +158,7 @@ function AlgoDisplay({setShowList, setIsLoading, codeObj, setCodeObj }) {
           </div>
         }
         {
-          Object.keys(similarAlgo).length > 0 && 
+          Object.keys(similarAlgo).length > 0 && similarAlgo.id.length > 0 && 
           <div className={classes.linkedAlgoContainer}>
             <p className={classes.linkedAlgoTitle}> Similar: </p>
             <p 
@@ -164,7 +171,7 @@ function AlgoDisplay({setShowList, setIsLoading, codeObj, setCodeObj }) {
           </div>
         }
         {
-          Object.keys(followupAlgo).length > 0 && 
+          Object.keys(followupAlgo).length > 0 && followupAlgo.id.length > 0 && 
           <div className={classes.linkedAlgoContainer}>
             <p className={classes.linkedAlgoTitle}> Follow-Up: </p>
             <p 

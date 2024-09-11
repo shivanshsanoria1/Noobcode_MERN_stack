@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import classes from './css/AlgoTable.module.css'
 import baseUrl from '../config/baseUrl'
 
-function AlgoTable({ algoObjs, setShowList, setIsError, setCodeObj }) {
+function AlgoTable({ algoObjs, setShowList, setIsError, setAlgoObj }) {
 
   const items = algoObjs.map((algoObj) => algoObj)
 
@@ -50,8 +50,12 @@ function AlgoTable({ algoObjs, setShowList, setIsError, setCodeObj }) {
 
       const response = await fetch(`${baseUrl}/algos?algo_id=${algoId}`)
       const data = await response.json()
+      
+      if(data.found === false){
+        throw new Error()
+      }
 
-      setCodeObj((codeObj) => ({
+      setAlgoObj((codeObj) => ({
         ...codeObj,
         id: data.id,
         title: data.title,
@@ -87,6 +91,7 @@ function AlgoTable({ algoObjs, setShowList, setIsError, setCodeObj }) {
 
   return (<>
     <div className={classes.filterAndSortContainer}>
+
       {/* Filter input */}
       <div className={classes.filterContainer}>
         <label htmlFor="SearchInput">Search: </label>
@@ -109,24 +114,29 @@ function AlgoTable({ algoObjs, setShowList, setIsError, setCodeObj }) {
     </div>
 
     {/* Algorithm List */}
-    <div className={classes.algoTableConatinerWrapper}>
-    <div className={classes.algoTableConatiner}>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Difficulty</th>
-          </tr>
-        </thead>
-      </table>
-      <tbody>
-        {itemsToDisplay}
-      </tbody>
-    </div>
-    </div>
 
-    <hr/>
+    {
+      itemsToDisplay.length > 0 ? 
+        <div className={classes.algoTableConatinerWrapper}>
+          <div className={classes.algoTableConatiner}>
+            <table>
+              <thead>
+                <tr>
+                  <th>S.No.</th>
+                  <th>Title</th>
+                  <th>Difficulty</th>
+                </tr>
+              </thead>
+            </table>
+            <tbody>
+              {itemsToDisplay}
+            </tbody>
+          </div>
+        </div> : 
+        <div className={classes.noMatchesText}> No matches found :( </div>
+      }
+
+    <hr className={classes.lastHR} />
   </>)
 }
 

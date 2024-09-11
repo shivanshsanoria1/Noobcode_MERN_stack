@@ -113,3 +113,17 @@
 .algoTableConatiner td:last-child{
   width: 20%;
 }
+
+.noMatchesText{
+  color: #dddddd;
+  text-align: center;
+  font-size: 26px;
+  padding: 20px 0;
+}
+
+.lastHR{
+  width: 80%;
+  border: 2px solid grey;
+  margin-top: 10px;
+  margin-bottom: 60px;
+}
