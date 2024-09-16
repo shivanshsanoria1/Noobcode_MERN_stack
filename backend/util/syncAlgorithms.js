@@ -7,9 +7,9 @@ function readFromCSV() {
   return new Promise(async (resolve, reject) => {
     try {
       const csvFilePath = path.join(__dirname, '..', '..', 'LeetcodeSolutions', 'helper', 'metadata', 'algorithms_metadata.csv')
-      const csv_data = await readFile(csvFilePath, { encoding: 'utf8' });
+      const csvData = await readFile(csvFilePath, { encoding: 'utf8' });
 
-      const data = csv_data.split('\n').map((row) => 
+      const data = csvData.split('\n').map((row) => 
         row
         .replaceAll(/,_/g, ';_')
         .replaceAll(/"/g, '')
@@ -30,6 +30,7 @@ function readFromCSV() {
         const followupId = data[i][5]
         
         algoMap.set(customId, {
+          customId,
           title: fileNameWithoutExt.split('_').join(' '),
           difficulty,
           linkedAlgos: {
@@ -52,7 +53,6 @@ function readFromCSV() {
       resolve(algoMap)
         
     } catch(err) {
-      console.log('ERROR: readFromCSV() in Algos.')
       console.log(err);
       reject()
     }
@@ -62,22 +62,20 @@ function readFromCSV() {
 function readCodeFiles(algoMap){
   return new Promise(async (resolve, reject) => {
     try{
-      const algosDirPath = path.join(__dirname, '..', '..', 'LeetcodeSolutions', 'helper')
+      const dirPath = path.join(__dirname, '..', '..', 'LeetcodeSolutions', 'helper')
 
-      const fileNames = await readdir(algosDirPath)
+      const fileNames_withDirs = await readdir(dirPath, { withFileTypes: true })
+      const fileNames = fileNames_withDirs
+      .filter((fileName) => fileName.isFile())
+      .map((dirent) => dirent.name)
 
       for(const fileName of fileNames){
-        // skip the directories
-        if(fileName === 'markdown' || fileName === 'metadata'){
-          continue
-        }
-
-        const algoFilePath = path.join(algosDirPath, fileName)
+        const filePath = path.join(dirPath, fileName)
 
         const customId = fileName.substring(fileName.indexOf('[') + 1, fileName.indexOf(']'))
-        const language = path.extname(algoFilePath).substring(1)
+        const language = path.extname(filePath).substring(1)
 
-        const fileData = await readFile(algoFilePath, { encoding: 'utf8' })
+        const fileData = await readFile(filePath, { encoding: 'utf8' })
 
         if(!algoMap.has(customId)){
           throw new Error(`File << ${fileName} >> not found in .csv file`)
@@ -94,7 +92,6 @@ function readCodeFiles(algoMap){
       resolve()
 
     }catch(err){
-      console.log('ERROR: readCodeFiles() in Algos.')
       console.log(err)
       reject()
     }
@@ -104,16 +101,16 @@ function readCodeFiles(algoMap){
 function readMarkdownFiles(algoMap) {
   return new Promise(async(resolve, reject) => {
     try{
-      const markdownDirPath = path.join(__dirname, '..', '..', 'LeetcodeSolutions', 'helper', 'markdown')
+      const dirPath = path.join(__dirname, '..', '..', 'LeetcodeSolutions', 'helper', 'markdown')
 
-      const fileNames = await readdir(markdownDirPath)
+      const fileNames = await readdir(dirPath)
 
       for(const fileName of fileNames){
-        const markdownFilePath = path.join(markdownDirPath, fileName)
+        const filePath = path.join(dirPath, fileName)
         
         const customId = fileName.substring(fileName.indexOf('[') + 1, fileName.indexOf(']'))
 
-        const fileData = await readFile(markdownFilePath, { encoding: 'utf8' })
+        const fileData = await readFile(filePath, { encoding: 'utf8' })
 
         if(!algoMap.has(customId)){
           throw new Error(`File << ${fileName} >> not found in .csv file`)
@@ -129,7 +126,6 @@ function readMarkdownFiles(algoMap) {
       resolve()
 
     }catch(err){
-      console.log('ERROR: readMarkdownFiles() in Algos.')
       console.log(err)
       reject()
     }
@@ -148,7 +144,7 @@ function convertMapToArray(mp){
   return arr
 }
 
-function linkedAlgos_stat_update(){
+function convert_customIds_to_DBIds_in_linkedAlgos(){
   return new Promise(async(resolve, reject) => {
     try{
       const algos = await Algorithm.find()
@@ -172,37 +168,41 @@ function linkedAlgos_stat_update(){
       }
 
       resolve()
+
     }catch(err){
-      console.log('ERROR: linkedAlgos_stat_update() in syncAlgos()')
       console.log(err)
       reject()
     }
   })
 }
 
-async function syncAlgos(){
-  try{
-    const startTime = Date.now()
-    console.log(`Algo. File Sync Started at: ${new Date().toISOString()}`)
+function syncAlgos(){
+  return new Promise(async(resolve, reject) => {
+    try{
+      const startTime = Date.now()
+      console.log(`Algo. File Sync Started at: ${new Date().toISOString()}`)
+  
+      const algoMap = await readFromCSV()
+      await readCodeFiles(algoMap)
+      await readMarkdownFiles(algoMap)
+      const algosArray = convertMapToArray(algoMap)
+  
+      await Algorithm.deleteMany({})
+      await Algorithm.insertMany(algosArray, {ordered: false})
+  
+      await convert_customIds_to_DBIds_in_linkedAlgos()
+  
+      console.log(`Algo. File Sync Completed at: ${new Date().toISOString()}`)
+      const endTime = Date.now()
+      console.log(`Time Taken to Sync Algo. Files = ${endTime - startTime} ms`)
 
-    const algoMap = await readFromCSV()
-    await readCodeFiles(algoMap)
-    await readMarkdownFiles(algoMap)
-    const algosArray = convertMapToArray(algoMap)
-
-    await Algorithm.deleteMany({})
-    await Algorithm.insertMany(algosArray, {ordered: false})
-
-    await linkedAlgos_stat_update()
-
-    console.log(`Algo. File Sync Completed at: ${new Date().toISOString()}`)
-    const endTime = Date.now()
-    console.log(`Time Taken to Sync Algo. Files = ${endTime - startTime} ms`)
-
-  }catch(err){
-    console.log('ERROR: syncAlgos() in Algos.')
-    console.log(err)
-  }
+      resolve()
+  
+    }catch(err){
+      console.log(err)
+      reject()
+    }
+  })
 }
 
 module.exports = syncAlgos

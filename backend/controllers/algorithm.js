@@ -63,7 +63,6 @@ exports.getAlgorithm = async (req, res) => {
     })
 
   }catch(err){
-    console.log('ERROR: getAlgorithm()')
     console.log(err)
     res.status(500).json({ 
       msg: 'Something went wrong' 

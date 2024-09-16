@@ -1,4 +1,5 @@
 const Solution = require('../models/solution')
+const SolutionStat = require('../models/SolutionStat')
 
 exports.getSolution = async (req, res) => {
   try{
@@ -34,7 +35,36 @@ exports.getSolution = async (req, res) => {
     })
 
   }catch(err){
-    console.log('ERROR: getSolution()')
+    console.log(err)
+    res.status(500).json({ 
+      msg: 'Something went wrong' 
+    })
+  }
+}
+
+exports.getSolutionStats = async(req, res) => {
+  try{
+    const { 
+      solvedCountCPP, 
+      solvedCountJS, 
+      solvedCountSQL, 
+      partialSolvedCountCPP, 
+      maxQuesId,
+      acceptedQuesIds, 
+      unacceptedQuesIds 
+    } = await SolutionStat.findOne({})
+
+    res.status(200).json({
+      solvedCountCPP, 
+      solvedCountJS, 
+      solvedCountSQL, 
+      partialSolvedCountCPP, 
+      maxQuesId,
+      acceptedQuesIds, 
+      unacceptedQuesIds
+    })
+    
+  }catch(err){
     console.log(err)
     res.status(500).json({ 
       msg: 'Something went wrong' 
