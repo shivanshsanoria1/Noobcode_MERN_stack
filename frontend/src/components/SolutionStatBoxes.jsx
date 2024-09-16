@@ -11,7 +11,7 @@ function SolutionStatBoxes() {
 
   async function getSolutionStats(){
     try{
-      const response = await fetch(`${baseUrl}/solution-stats`)
+      const response = await fetch(`${baseUrl}/solutions/stats`)
       const data = await response.json()
       
       setIsError(false)
